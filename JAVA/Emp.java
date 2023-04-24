@@ -1,20 +1,22 @@
-package day10;
+package day9;
 
-public class Emp {
-	int eno;
-	String name;
-	float sal;
-	
-	public Emp(int eno, String name, float sal) {
-		super();
-		this.eno = eno;
-		this.name = name;
-		this.sal = sal;
-	}
-	
-	void dispemp()
-	{
-		System.out.println(eno+" "+name+" "+sal);
-	}
-	
+import java.io.Serializable;
+
+public class Emp implements Serializable {
+ 
+int eid;
+String name;
+int sal;
+public Emp(int eid, String name, int sal) {
+	//super();
+	this.eid = eid;
+	this.name = name;
+	this.sal = sal;
+}
+@Override
+public String toString() {
+	return " eid=" + eid + ", name=" + name + ", sal=" + sal + " ";
+}
+
+
 }
