@@ -1,21 +1,24 @@
-package practice;
+package day12;
 
-public class Student {
-int rollno;
-String name;
-int std;
-String hobby;
-public Student(int rollno, String name, int std, String hobby) {
-	//super();
-	this.rollno = rollno;
-	this.name = name;
-	this.std = std;
-	this.hobby = hobby;
-}
-@Override
-public String toString() {
-	return "rollno= " + rollno + ", name= " + name + ", std= " + std + ", hobby= " + hobby + "";
-}
+import java.io.Serializable;
 
+public class Student implements Serializable
+{
 
+	int sid;
+	String sname;
+	int mark;
+	public Student(int sid, String sname, int mark) {
+		
+		this.sid = sid;
+		this.sname = sname;
+		this.mark = mark;
+	}
+	
+	void displayStudent()
+	{
+		System.out.println(sid+sname+mark);
+	}
+	
+	
 }
