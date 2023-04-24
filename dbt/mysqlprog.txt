@@ -1,0 +1,668 @@
+4)
+mysql> create procedure sp_salstatus(in empid varchar(15))
+    -> begin
+    -> select * from salary where empcode=empid;
+    -> end//
+Query OK, 0 rows affected (0.13 sec)
+
+mysql> delimiter ;
+mysql> select * from salary;
++---------+------------+-------+-------+--------+
+| empcode | salmonth   | basic | allow | deduct |
++---------+------------+-------+-------+--------+
+| 6569    | 2011-12-01 | 11800 |   600 |    400 |
+| 6569    | 2012-01-01 | 12400 |  1240 |    550 |
+| 6569    | 2012-02-01 | 12400 |  1240 |    550 |
+| 7192    | 2011-12-01 | 11700 |   600 |    500 |
+| 7192    | 2012-01-01 | 12300 |  1230 |    550 |
+| 7192    | 2012-02-01 | 12300 |  1230 |    550 |
+| 7369    | 2011-12-01 | 11600 |   600 |    450 |
+| 7369    | 2012-01-01 | 12200 |  1220 |    550 |
+| 7369    | 2012-02-01 | 12200 |  1220 |    550 |
+| 7499    | 2011-12-01 | 13400 |   800 |    550 |
+| 7499    | 2012-01-01 | 14200 |  1420 |    650 |
+| 7499    | 2012-02-01 | 14200 |  1420 |    650 |
+| 7521    | 2011-12-01 | 11400 |   800 |    500 |
+| 7521    | 2012-01-01 | 12200 |  1220 |    550 |
+| 7521    | 2012-02-01 | 12200 |  1220 |    550 |
+| 7566    | 2011-12-01 | 12000 |   600 |    400 |
+| 7566    | 2012-01-01 | 12400 |  1240 |    550 |
+| 7566    | 2012-02-01 | 12400 |  1240 |    550 |
+| 7654    | 2011-12-01 | 11900 |   700 |    500 |
+| 7654    | 2012-01-01 | 12600 |  1260 |    550 |
+| 7654    | 2012-02-01 | 12600 |  1260 |    550 |
+| 7698    | 2011-12-01 | 13900 |   800 |    500 |
+| 7698    | 2012-01-01 | 14700 |  1470 |    650 |
+| 7698    | 2012-02-01 | 14700 |  1470 |    650 |
+| 7782    | 2011-12-01 | 11800 |   600 |    500 |
+| 7782    | 2012-01-01 | 12400 |  1240 |    550 |
+| 7782    | 2012-02-01 | 12400 |  1240 |    550 |
+| 7788    | 2011-12-01 | 11300 |   600 |    450 |
+| 7788    | 2012-01-01 | 11900 |  1190 |    550 |
+| 7788    | 2012-02-01 | 11900 |  1190 |    550 |
+| 7802    | 2011-12-01 | 11900 |   500 |    300 |
+| 7802    | 2012-01-01 | 12400 |  1240 |    550 |
+| 7802    | 2012-02-01 | 12400 |  1240 |    550 |
+| 7839    | 2011-12-01 | 30000 |  3000 |   1200 |
+| 7839    | 2012-01-01 | 32000 |  3200 |   1250 |
+| 7839    | 2012-02-01 | 32000 |  3200 |   1250 |
+| 7844    | 2011-12-01 | 13400 |   900 |    600 |
+| 7844    | 2012-01-01 | 14300 |  1430 |    650 |
+| 7844    | 2012-02-01 | 14300 |  1430 |    650 |
+| 7876    | 2011-12-01 | 11700 |   600 |    500 |
+| 7876    | 2012-01-01 | 12300 |  1230 |    550 |
+| 7876    | 2012-02-01 | 12300 |  1230 |    550 |
+| 7900    | 2011-12-01 | 11500 |   500 |    300 |
+| 7900    | 2012-01-01 | 12000 |  1200 |    550 |
+| 7900    | 2012-02-01 | 12000 |  1200 |    550 |
+| 7902    | 2011-12-01 | 11200 |   600 |    450 |
+| 7902    | 2012-01-01 | 11800 |  1180 |    550 |
+| 7902    | 2012-02-01 | 11800 |  1180 |    550 |
+| 7934    | 2011-12-01 | 11450 |   500 |    250 |
+| 7934    | 2012-01-01 | 11950 |  1195 |    550 |
+| 7934    | 2012-02-01 | 11950 |  1195 |    550 |
+| 7939    | 2011-12-01 | 11100 |   700 |    400 |
+| 7939    | 2012-01-01 | 11800 |  1180 |    550 |
+| 7939    | 2012-02-01 | 11800 |  1180 |    550 |
+| 7999    | 2011-12-01 | 13950 |   650 |    600 |
+| 7999    | 2012-01-01 | 14600 |  1460 |    650 |
+| 7999    | 2012-02-01 | 14600 |  1460 |    650 |
+| 9902    | 2011-12-01 | 13400 |   800 |    500 |
+| 9902    | 2012-01-01 | 14200 |  1420 |    650 |
+| 9902    | 2012-02-01 | 14200 |  1420 |    650 |
++---------+------------+-------+-------+--------+
+60 rows in set (0.05 sec)
+
+mysql> call sp_salstatus(9902);
++---------+------------+-------+-------+--------+
+| empcode | salmonth   | basic | allow | deduct |
++---------+------------+-------+-------+--------+
+| 9902    | 2011-12-01 | 13400 |   800 |    500 |
+| 9902    | 2012-01-01 | 14200 |  1420 |    650 |
+| 9902    | 2012-02-01 | 14200 |  1420 |    650 |
++---------+------------+-------+-------+--------+
+3 rows in set (0.01 sec)
+
+Query OK, 0 rows affected (0.02 sec)
+
+mysql>
+
+
+
+
+3)
+mysql> create procedure sp_deptinfo(dname varchar(50))
+    -> begin
+    -> select e.empcode,e.empname,e.deptcode,d.deptname from emp e join dept d  using (deptcode)
+    -> where d.deptname=dname;
+    -> select count(*) from emp,dept where dept.deptcode=emp.deptcode and  dept.deptname=dname;
+    -> end//
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> call sp_deptinfo('accounts')//
++---------+---------+----------+----------+
+| empcode | empname | deptcode | deptname |
++---------+---------+----------+----------+
+| 7192    | John    | ACCT     | Accounts |
+| 7782    | Menon   | ACCT     | Accounts |
+| 7839    | Reddy   | ACCT     | Accounts |
+| 7934    | Kaul    | ACCT     | Accounts |
++---------+---------+----------+----------+
+4 rows in set (0.02 sec)
+
++----------+
+| count(*) |
++----------+
+|        4 |
++----------+
+1 row in set (0.10 sec)
+
+Query OK, 0 rows affected (0.15 sec)
+
+
+mysql> select * from emp where deptcode='acct'//
++---------+---------+----------+------------+------------+------+-----------+---------+-----------+------------+----------+------+------------+
+| empcode | empname | deptcode | birthdate  | joindate   | sex  | desigcode | supcode | gradecode | gradelevel | basicpay | age  | experience |
++---------+---------+----------+------------+------------+------+-----------+---------+-----------+------------+----------+------+------------+
+| 7192    | John    | ACCT     | 1968-11-05 | 1994-12-03 | M    | CLRK      | 7902    | GC6       | GL2        |    12300 |   53 |         28 |
+| 7782    | Menon   | ACCT     | 1967-08-30 | 1981-06-09 | M    | MNGR      | 7839    | GC6       | GL2        |    12400 |   55 |         41 |
+| 7839    | Reddy   | ACCT     | 1959-12-12 | 1981-07-17 | M    | PRES      | NULL    | GC1       | GL1        |    32000 |   62 |         41 |
+| 7934    | Kaul    | ACCT     | 1957-05-02 | 1982-01-23 | M    | CLRK      | 7782    | GC6       | GL2        |    11950 |   65 |         40 |
++---------+---------+----------+------------+------------+------+-----------+---------+-----------+------------+----------+------+------------+
+4 rows in set (0.00 sec)
+
+
+5)
+
+
+mysql>  create procedure sp_delrec(in ename varchar(40), out d_name varchar(50))
+    -> begin
+    -> select name into d_name from emp where name=ename;
+    -> delete from emp
+    -> where name=ename;
+    -> end//
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> select * from emp//
++---------+------------+-------+--------+
+| name    | dob        | empid | salary |
++---------+------------+-------+--------+
+| kalpesh | 0000-00-00 |     1 |   1500 |
+| ravi    | 0000-00-00 |     5 |   1900 |
+| ajit    | 0000-00-00 |    18 |   2544 |
++---------+------------+-------+--------+
+3 rows in set (0.00 sec)
+
+mysql> call sp_delrec('ravi',@name)//
+Query OK, 1 row affected (0.04 sec)
+
+mysql> select @name as 'deleted name'//
++--------------+
+| deleted name |
++--------------+
+| ravi         |
++--------------+
+1 row in set (0.00 sec)
+
+mysql> select * from emp;
+    -> //
++---------+------------+-------+--------+
+| name    | dob        | empid | salary |
++---------+------------+-------+--------+
+| kalpesh | 0000-00-00 |     1 |   1500 |
+| ajit    | 0000-00-00 |    18 |   2544 |
++---------+------------+-------+--------+
+2 rows in set (0.00 sec)
+
+------------------------------------------------------------------------------
+10)
+mysql> create procedure sp_get_dept()
+    -> begin
+    -> select emp.deptno,dept.dname,count(*) as no_emp from emp join dept on dept.deptno=emp.deptno
+    -> group by deptno having count(*)>5;
+    -> end//
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> call sp_get_dept;
+    -> //
++--------+-------+--------+
+| deptno | dname | no_emp |
++--------+-------+--------+
+|     30 | SALES |      6 |
++--------+-------+--------+
+1 row in set (0.00 sec)
+
+Query OK, 0 rows affected (0.01 sec)
+
+-----------------------------------------------------------
+09)
+
+mysql> create procedure sp_exp()
+    -> begin
+    -> select empno,ename,hiredate,comm from emp order by hiredate;
+    -> end//
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> call sp_exp//
++-------+--------+------------+---------+
+| empno | ename  | hiredate   | comm    |
++-------+--------+------------+---------+
+|  7369 | SMITH  | 1980-12-17 |    NULL |
+|  7499 | ALLEN  | 1981-02-20 |  300.00 |
+|  7521 | WARD   | 1981-02-22 |  500.00 |
+|  7566 | JONES  | 1981-04-02 |    NULL |
+|  7698 | BLAKE  | 1981-05-01 |    NULL |
+|  7782 | CLARK  | 1981-06-09 |    NULL |
+|  7844 | TURNER | 1981-09-08 |    0.00 |
+|  7654 | MARTIN | 1981-09-28 | 1400.00 |
+|  7839 | KING   | 1981-11-17 |    NULL |
+|  7900 | JAMES  | 1981-12-03 |    NULL |
+|  7902 | FORD   | 1981-12-03 |    NULL |
+|  7934 | MILLER | 1982-01-23 |    NULL |
+|  7788 | SCOTT  | 1982-12-09 |    NULL |
+|  7876 | ADAMS  | 1983-01-12 |    NULL |
++-------+--------+------------+---------+
+14 rows in set (0.00 sec)
+
+Query OK, 0 rows affected (0.03 sec)
+
+mysql>
+
+------------------------------------------------------------------------------
+mysql> create procedure cur_pro(no int)
+    -> begin
+    -> declare flag int default 0;
+    -> declare emp_no int;
+    -> declare name varchar(50);
+    -> declare job varchar(50);
+    -> declare salary int;
+    -> declare c1 cursor for select empno,ename,job,sal from emp where deptno=no;
+    -> declare continue handler for not found set flag=1;
+    -> open c1;
+    -> myloop:loop
+    -> fetch c1 into emp_no,name,job,salary;
+    -> if flag=1 then
+    -> leave myloop;
+    -> end if;
+    -> select emp_no,name,job,salary;
+    -> end loop;
+    -> close c1;
+    -> end//
+Query OK, 0 rows affected (0.10 sec)
+
+mysql> call cur_pro(10)//
++--------+-------+------+--------+
+| emp_no | name  | job  | salary |
++--------+-------+------+--------+
+|   7782 | CLARK | NULL |   2450 |
++--------+-------+------+--------+
+1 row in set (0.02 sec)
+
++--------+------+------+--------+
+| emp_no | name | job  | salary |
++--------+------+------+--------+
+|   7839 | KING | NULL |   5000 |
++--------+------+------+--------+
+1 row in set (0.04 sec)
+
++--------+--------+------+--------+
+| emp_no | name   | job  | salary |
++--------+--------+------+--------+
+|   7934 | MILLER | NULL |   1300 |
++--------+--------+------+--------+
+1 row in set (0.07 sec)
+
+Query OK, 0 rows affected (0.10 sec)
+----------------------------------------------------------------------------------
+
+
+mysql> create procedure cur_Pro2(val int)
+    ->  begin
+    -> declare flag int default 0;
+    -> declare name varchar(50);
+    -> declare emp_sal int;
+    -> declare c2 cursor for select ename,sal from emp where sal<val;
+    -> declare continue handler for not found set flag=1;
+    -> open c2;
+    -> myloop:loop
+    -> fetch c2 into name,emp_sal;
+    -> if flag=1 then
+    -> leave myloop;
+    -> end if;
+    -> select name,emp_sal;
+    -> end loop;
+    -> close c2;
+    -> end//
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> call cur_pro2(2000)//
++-------+---------+
+| name  | emp_sal |
++-------+---------+
+| SMITH |     800 |
++-------+---------+
+1 row in set (0.00 sec)
+
++-------+---------+
+| name  | emp_sal |
++-------+---------+
+| ALLEN |    1600 |
++-------+---------+
+1 row in set (0.02 sec)
+
++------+---------+
+| name | emp_sal |
++------+---------+
+| WARD |    1250 |
++------+---------+
+1 row in set (0.04 sec)
+
++--------+---------+
+| name   | emp_sal |
++--------+---------+
+| MARTIN |    1250 |
++--------+---------+
+1 row in set (0.04 sec)
+
++--------+---------+
+| name   | emp_sal |
++--------+---------+
+| TURNER |    1500 |
++--------+---------+
+1 row in set (0.08 sec)
+
++-------+---------+
+| name  | emp_sal |
++-------+---------+
+| ADAMS |    1100 |
++-------+---------+
+1 row in set (0.11 sec)
+
++-------+---------+
+| name  | emp_sal |
++-------+---------+
+| JAMES |     950 |
++-------+---------+
+1 row in set (0.15 sec)
+
++--------+---------+
+| name   | emp_sal |
++--------+---------+
+| MILLER |    1300 |
++--------+---------+
+1 row in set (0.19 sec)
+
+Query OK, 0 rows affected (0.21 sec)
+
+mysql>
+------------------------------------------------------------------------------
+
+mysql> create procedure incentive()
+    -> begin
+    -> declare flag int default 0;
+    -> declare name varchar(50);
+    -> declare incent int;
+    -> declare eid int;
+    -> declare hdate date;
+    -> declare c3 cursor for select empno,ename,hiredate from emp;
+    -> declare continue handler for not found set flag=1;
+    -> open c3;
+    -> emp:loop
+    -> fetch c3 into eid,name,hdate;
+    -> if flag=1 then
+    -> leave emp;
+    -> end if;
+    -> if hdate>'1981-01-01' then
+    -> set incent=500;
+    -> select eid,name,hdate,incent;
+    -> end if;
+    -> set incent=300;
+    -> select eid,name,hdate,incent;
+    -> end loop;
+    -> close c3;
+    -> end//
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> call incentive()//
++------+-------+------------+--------+
+| eid  | name  | hdate      | incent |
++------+-------+------------+--------+
+| 7369 | SMITH | 1980-12-17 |    300 |
++------+-------+------------+--------+
+1 row in set (0.00 sec)
+
++------+-------+------------+--------+
+| eid  | name  | hdate      | incent |
++------+-------+------------+--------+
+| 7499 | ALLEN | 1981-02-20 |    500 |
++------+-------+------------+--------+
+1 row in set (0.02 sec)
+
++------+-------+------------+--------+
+| eid  | name  | hdate      | incent |
++------+-------+------------+--------+
+| 7499 | ALLEN | 1981-02-20 |    300 |
++------+-------+------------+--------+
+1 row in set (0.05 sec)
+
++------+------+------------+--------+
+| eid  | name | hdate      | incent |
++------+------+------------+--------+
+| 7521 | WARD | 1981-02-22 |    500 |
++------+------+------------+--------+
+1 row in set (0.06 sec)
+
++------+------+------------+--------+
+| eid  | name | hdate      | incent |
++------+------+------------+--------+
+| 7521 | WARD | 1981-02-22 |    300 |
++------+------+------------+--------+
+1 row in set (0.07 sec)
+
++------+-------+------------+--------+
+| eid  | name  | hdate      | incent |
++------+-------+------------+--------+
+| 7566 | JONES | 1981-04-02 |    500 |
++------+-------+------------+--------+
+1 row in set (0.08 sec)
+
++------+-------+------------+--------+
+| eid  | name  | hdate      | incent |
++------+-------+------------+--------+
+| 7566 | JONES | 1981-04-02 |    300 |
++------+-------+------------+--------+
+1 row in set (0.10 sec)
+
++------+--------+------------+--------+
+| eid  | name   | hdate      | incent |
++------+--------+------------+--------+
+| 7654 | MARTIN | 1981-09-28 |    500 |
++------+--------+------------+--------+
+1 row in set (0.10 sec)
+
++------+--------+------------+--------+
+| eid  | name   | hdate      | incent |
++------+--------+------------+--------+
+| 7654 | MARTIN | 1981-09-28 |    300 |
++------+--------+------------+--------+
+1 row in set (0.13 sec)
+
++------+-------+------------+--------+
+| eid  | name  | hdate      | incent |
++------+-------+------------+--------+
+| 7698 | BLAKE | 1981-05-01 |    500 |
++------+-------+------------+--------+
+1 row in set (0.13 sec)
+
++------+-------+------------+--------+
+| eid  | name  | hdate      | incent |
++------+-------+------------+--------+
+| 7698 | BLAKE | 1981-05-01 |    300 |
++------+-------+------------+--------+
+1 row in set (0.16 sec)
+
++------+-------+------------+--------+
+| eid  | name  | hdate      | incent |
++------+-------+------------+--------+
+| 7782 | CLARK | 1981-06-09 |    500 |
++------+-------+------------+--------+
+1 row in set (0.18 sec)
+
++------+-------+------------+--------+
+| eid  | name  | hdate      | incent |
++------+-------+------------+--------+
+| 7782 | CLARK | 1981-06-09 |    300 |
++------+-------+------------+--------+
+1 row in set (0.19 sec)
+
++------+-------+------------+--------+
+| eid  | name  | hdate      | incent |
++------+-------+------------+--------+
+| 7788 | SCOTT | 1982-12-09 |    500 |
++------+-------+------------+--------+
+1 row in set (0.21 sec)
+
++------+-------+------------+--------+
+| eid  | name  | hdate      | incent |
++------+-------+------------+--------+
+| 7788 | SCOTT | 1982-12-09 |    300 |
++------+-------+------------+--------+
+1 row in set (0.22 sec)
+
++------+------+------------+--------+
+| eid  | name | hdate      | incent |
++------+------+------------+--------+
+| 7839 | KING | 1981-11-17 |    500 |
++------+------+------------+--------+
+1 row in set (0.25 sec)
+
++------+------+------------+--------+
+| eid  | name | hdate      | incent |
++------+------+------------+--------+
+| 7839 | KING | 1981-11-17 |    300 |
++------+------+------------+--------+
+1 row in set (0.27 sec)
+
++------+--------+------------+--------+
+| eid  | name   | hdate      | incent |
++------+--------+------------+--------+
+| 7844 | TURNER | 1981-09-08 |    500 |
++------+--------+------------+--------+
+1 row in set (0.29 sec)
+
++------+--------+------------+--------+
+| eid  | name   | hdate      | incent |
++------+--------+------------+--------+
+| 7844 | TURNER | 1981-09-08 |    300 |
++------+--------+------------+--------+
+1 row in set (0.31 sec)
+
++------+-------+------------+--------+
+| eid  | name  | hdate      | incent |
++------+-------+------------+--------+
+| 7876 | ADAMS | 1983-01-12 |    500 |
++------+-------+------------+--------+
+1 row in set (0.33 sec)
+
++------+-------+------------+--------+
+| eid  | name  | hdate      | incent |
++------+-------+------------+--------+
+| 7876 | ADAMS | 1983-01-12 |    300 |
++------+-------+------------+--------+
+1 row in set (0.35 sec)
+
++------+-------+------------+--------+
+| eid  | name  | hdate      | incent |
++------+-------+------------+--------+
+| 7900 | JAMES | 1981-12-03 |    500 |
++------+-------+------------+--------+
+1 row in set (0.38 sec)
+
++------+-------+------------+--------+
+| eid  | name  | hdate      | incent |
++------+-------+------------+--------+
+| 7900 | JAMES | 1981-12-03 |    300 |
++------+-------+------------+--------+
+1 row in set (0.39 sec)
+
++------+------+------------+--------+
+| eid  | name | hdate      | incent |
++------+------+------------+--------+
+| 7902 | FORD | 1981-12-03 |    500 |
++------+------+------------+--------+
+1 row in set (0.40 sec)
+
++------+------+------------+--------+
+| eid  | name | hdate      | incent |
++------+------+------------+--------+
+| 7902 | FORD | 1981-12-03 |    300 |
++------+------+------------+--------+
+1 row in set (0.45 sec)
+
++------+--------+------------+--------+
+| eid  | name   | hdate      | incent |
++------+--------+------------+--------+
+| 7934 | MILLER | 1982-01-23 |    500 |
++------+--------+------------+--------+
+1 row in set (0.51 sec)
+
++------+--------+------------+--------+
+| eid  | name   | hdate      | incent |
++------+--------+------------+--------+
+| 7934 | MILLER | 1982-01-23 |    300 |
++------+--------+------------+--------+
+1 row in set (0.54 sec)
+
+Query OK, 0 rows affected (0.59 sec)
+
+mysql>
+
+
+--------------------------------------------------------------------------------------------
+
+
+
+stored function
+
+1)
+
+mysql> create function emp_dept(name varchar(50))
+    -> returns int
+    -> deterministic
+    -> begin
+    -> return (select count(*) from emp e join dept d where e.deptno=d.deptno and d.dname=name);
+    -> end//
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> select emp_dept('sales')
+    -> //
++-------------------+
+| emp_dept('sales') |
++-------------------+
+|                 6 |
++-------------------+
+1 row in set (0.03 sec)
+
+
+
+2)
+
+mysql> create function get_dept()
+    -> returns int
+    -> deterministic
+    -> begin
+    -> return (select deptno from emp  group by deptno having count(*)<5 );
+    -> end//
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> select get_dept()//
++------------+
+| get_dept() |
++------------+
+|         10 |
++------------+
+1 row in set (0.00 sec)
+
+
+
+
+3)
+
+ create function maxsec(dname varchar(50))
+    -> returns int
+    -> deterministic
+    -> begin
+    -> return ( select max(sal) from emp,dept where emp.deptno=dept.deptno and dept.dname=dname and sal <> (select max(sal) from emp) group by emp.deptno);
+    -> end//
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> select maxsec('accounting')//
++----------------------+
+| maxsec('accounting') |
++----------------------+
+|                 2450 |
++----------------------+
+1 row in set (0.00 sec)
+
+
+4)
+
+
+mysql> create function max_exp()
+    -> returns varchar(50)
+    -> deterministic
+    -> begin
+    -> return(select ename from emp order by hiredate asc limit 1);
+    -> end//
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> select max_exp()//
++-----------+
+| max_exp() |
++-----------+
+| SMITH     |
++-----------+
+1 row in set (0.00 sec)
+
+
+

@@ -1,0 +1,1074 @@
+1)
+mysql> select empname,empcode,desigcode from emp;
++---------+---------+-----------+
+| empname | empcode | desigcode |
++---------+---------+-----------+
+| Tiwari  | 6569    | MNGR      |
+| John    | 7192    | CLRK      |
+| Shah    | 7369    | CLRK      |
+| Roy     | 7499    | SLMN      |
+| Wilson  | 7521    | MNGR      |
+| Jain    | 7566    | MNGR      |
+| Gupta   | 7654    | SLMN      |
+| Murthy  | 7698    | MNGR      |
+| Menon   | 7782    | MNGR      |
+| Khan    | 7788    | SPRV      |
+| Sanghvi | 7802    | MNGR      |
+| Reddy   | 7839    | PRES      |
+| Singh   | 7844    | SLMN      |
+| Patil   | 7876    | CLRK      |
+| Shroff  | 7900    | CLRK      |
+| Naik    | 7902    | MNGR      |
+| Kaul    | 7934    | CLRK      |
+| Rai     | 7939    | CLRK      |
+| Sinha   | 7999    | SLMN      |
+| Ahmad   | 9902    | SLMN      |
++---------+---------+-----------+
+20 rows in set (0.00 sec)
+
+2)mysql> select * from dept;
++----------+------------+--------+
+| deptcode | deptname   | budget |
++----------+------------+--------+
+| ACCT     | Accounts   |     19 |
+| FACL     | Facilities |     42 |
+| PERS     | Personal   |     12 |
+| PRCH     | Purchase   |     25 |
+| SALE     | Sales      |     39 |
+| STOR     | Stores     |     33 |
++----------+------------+--------+
+6 rows in set (0.00 sec)
+
+3)
+mysql> select empname,deptname from emp,dept
+    -> where emp.deptcode=dept.deptcode;
++---------+----------+
+| empname | deptname |
++---------+----------+
+| John    | Accounts |
+| Menon   | Accounts |
+| Reddy   | Accounts |
+| Kaul    | Accounts |
+| Shah    | Purchase |
+| Jain    | Purchase |
+| Khan    | Purchase |
+| Patil   | Purchase |
+| Naik    | Purchase |
+| Rai     | Purchase |
+| Roy     | Sales    |
+| Gupta   | Sales    |
+| Murthy  | Sales    |
+| Singh   | Sales    |
+| Shroff  | Sales    |
+| Sinha   | Sales    |
+| Ahmad   | Sales    |
+| Tiwari  | Stores   |
+| Wilson  | Stores   |
+| Sanghvi | Stores   |
++---------+----------+
+20 rows in set (0.00 sec)
+
+4)
+mysql> select empname,supcode from emp where supcode is null;
++---------+---------+
+| empname | supcode |
++---------+---------+
+| Reddy   | NULL    |
++---------+---------+
+1 row in set (0.00 sec)
+
+5)
+
+mysql> select empname,supcode from emp
+    -> where supcode=7839;
++---------+---------+
+| empname | supcode |
++---------+---------+
+| Jain    | 7839    |
+| Murthy  | 7839    |
+| Menon   | 7839    |
+| Naik    | 7839    |
++---------+---------+
+4 rows in set (0.00 sec)
+
+6)
+mysql> select empname,birthdate,age from emp order by age desc
+    -> limit 1;
++---------+------------+------+
+| empname | birthdate  | age  |
++---------+------------+------+
+| Jain    | 1955-01-24 |   67 |
++---------+------------+------+
+1 row in set (0.00 sec)
+
+7)
+
+mysql> select empname,age from emp
+    -> where age>60
+    -> ;
++---------+------+
+| empname | age  |
++---------+------+
+| Shah    |   62 |
+| Roy     |   65 |
+| Wilson  |   66 |
+| Jain    |   67 |
+| Gupta   |   65 |
+| Murthy  |   62 |
+| Khan    |   65 |
+| Reddy   |   62 |
+| Singh   |   66 |
+| Shroff  |   66 |
+| Naik    |   64 |
+| Kaul    |   65 |
++---------+------+
+12 rows in set (0.00 sec)
+
+8)
+mysql> select empname as 'manager name',deptname from emp,dept
+    -> where emp.deptcode=dept.deptcode and emp.desigcode='mngr';
++--------------+----------+
+| manager name | deptname |
++--------------+----------+
+| Tiwari       | Stores   |
+| Wilson       | Stores   |
+| Jain         | Purchase |
+| Murthy       | Sales    |
+| Menon        | Accounts |
+| Sanghvi      | Stores   |
+| Naik         | Purchase |
++--------------+----------+
+7 rows in set (0.00 sec)
+
+
+
+9)
+
+mysql> select empname,designame,deptname from emp,dept,desig
+    -> where emp.desigcode=desig.desigcode and emp.deptcode=dept.deptcode and desig.desigcode='mngr';
++---------+-----------+----------+
+| empname | designame | deptname |
++---------+-----------+----------+
+| Tiwari  | Manager   | Stores   |
+| Wilson  | Manager   | Stores   |
+| Jain    | Manager   | Purchase |
+| Murthy  | Manager   | Sales    |
+| Menon   | Manager   | Accounts |
+| Sanghvi | Manager   | Stores   |
+| Naik    | Manager   | Purchase |
++---------+-----------+----------+
+7 rows in set (0.00 sec)
+
+10)
+mysql> select empname,deptname from emp,dept
+    -> where emp.deptcode=dept.deptcode and (deptname='personal' or deptname='accounts' or deptname='purchase');
++---------+----------+
+| empname | deptname |
++---------+----------+
+| John    | Accounts |
+| Menon   | Accounts |
+| Reddy   | Accounts |
+| Kaul    | Accounts |
+| Shah    | Purchase |
+| Jain    | Purchase |
+| Khan    | Purchase |
+| Patil   | Purchase |
+| Naik    | Purchase |
+| Rai     | Purchase |
++---------+----------+
+10 rows in set (0.00 sec)
+
+11)
+mysql> select empname,deptname from emp,dept
+    -> where emp.deptcode=dept.deptcode and dept.deptcode in ('acct','pers');
++---------+----------+
+| empname | deptname |
++---------+----------+
+| John    | Accounts |
+| Menon   | Accounts |
+| Reddy   | Accounts |
+| Kaul    | Accounts |
++---------+----------+
+4 rows in set (0.00 sec)
+
+ 
+
+
+
+12)
+
+mysql> select empname,deptname from emp,dept
+    -> where emp.deptcode=dept.deptcode and dept.deptcode='acct'and dept.deptcode='pers';
+Empty set (0.00 sec)
+
+
+14)
+mysql> select empname,age from emp
+    -> order by age asc
+    -> limit 1;
++---------+------+
+| empname | age  |
++---------+------+
+| Tiwari  |   33 |
++---------+------+
+1 row in set (0.00 sec)  
+
+15)
+
+mysql> select empname,basic from emp,salary
+    -> where emp.empcode=salary.empcode and salary.basic != 12400;
++---------+-------+
+| empname | basic |
++---------+-------+
+| Tiwari  | 11800 |
+| John    | 11700 |
+| John    | 12300 |
+| John    | 12300 |
+| Shah    | 11600 |
+| Shah    | 12200 |
+| Shah    | 12200 |
+| Roy     | 13400 |
+| Roy     | 14200 |
+| Roy     | 14200 |
+| Wilson  | 11400 |
+| Wilson  | 12200 |
+| Wilson  | 12200 |
+| Jain    | 12000 |
+| Gupta   | 11900 |
+| Gupta   | 12600 |
+| Gupta   | 12600 |
+| Murthy  | 13900 |
+| Murthy  | 14700 |
+| Murthy  | 14700 |
+| Menon   | 11800 |
+| Khan    | 11300 |
+| Khan    | 11900 |
+| Khan    | 11900 |
+| Sanghvi | 11900 |
+| Reddy   | 30000 |
+| Reddy   | 32000 |
+| Reddy   | 32000 |
+| Singh   | 13400 |
+| Singh   | 14300 |
+| Singh   | 14300 |
+| Patil   | 11700 |
+| Patil   | 12300 |
+| Patil   | 12300 |
+| Shroff  | 11500 |
+| Shroff  | 12000 |
+| Shroff  | 12000 |
+| Naik    | 11200 |
+| Naik    | 11800 |
+| Naik    | 11800 |
+| Kaul    | 11450 |
+| Kaul    | 11950 |
+| Kaul    | 11950 |
+| Rai     | 11100 |
+| Rai     | 11800 |
+| Rai     | 11800 |
+| Sinha   | 13950 |
+| Sinha   | 14600 |
+| Sinha   | 14600 |
+| Ahmad   | 13400 |
+| Ahmad   | 14200 |
+| Ahmad   | 14200 |
++---------+-------+
+52 rows in set (0.00 sec)
+
+mysql>
+ 16)
+
+mysql> select empname,basic from emp,salary
+    -> where emp.empcode=salary.empcode and (salary.basic between 11000 and 12000);
++---------+-------+
+| empname | basic |
++---------+-------+
+| Tiwari  | 11800 |
+| John    | 11700 |
+| Shah    | 11600 |
+| Wilson  | 11400 |
+| Jain    | 12000 |
+| Gupta   | 11900 |
+| Menon   | 11800 |
+| Khan    | 11300 |
+| Khan    | 11900 |
+| Khan    | 11900 |
+| Sanghvi | 11900 |
+| Patil   | 11700 |
+| Shroff  | 11500 |
+| Shroff  | 12000 |
+| Shroff  | 12000 |
+| Naik    | 11200 |
+| Naik    | 11800 |
+| Naik    | 11800 |
+| Kaul    | 11450 |
+| Kaul    | 11950 |
+| Kaul    | 11950 |
+| Rai     | 11100 |
+| Rai     | 11800 |
+| Rai     | 11800 |
++---------+-------+
+24 rows in set (0.00 sec)
+
+17)
+
+mysql> select empname,basic from emp,salary
+    -> where emp.empcode=salary.empcode and (salary.basic not between 11000 and 12000);
++---------+-------+
+| empname | basic |
++---------+-------+
+| Tiwari  | 12400 |
+| Tiwari  | 12400 |
+| John    | 12300 |
+| John    | 12300 |
+| Shah    | 12200 |
+| Shah    | 12200 |
+| Roy     | 13400 |
+| Roy     | 14200 |
+| Roy     | 14200 |
+| Wilson  | 12200 |
+| Wilson  | 12200 |
+| Jain    | 12400 |
+| Jain    | 12400 |
+| Gupta   | 12600 |
+| Gupta   | 12600 |
+| Murthy  | 13900 |
+| Murthy  | 14700 |
+| Murthy  | 14700 |
+| Menon   | 12400 |
+| Menon   | 12400 |
+| Sanghvi | 12400 |
+| Sanghvi | 12400 |
+| Reddy   | 30000 |
+| Reddy   | 32000 |
+| Reddy   | 32000 |
+| Singh   | 13400 |
+| Singh   | 14300 |
+| Singh   | 14300 |
+| Patil   | 12300 |
+| Patil   | 12300 |
+| Sinha   | 13950 |
+| Sinha   | 14600 |
+| Sinha   | 14600 |
+| Ahmad   | 13400 |
+| Ahmad   | 14200 |
+| Ahmad   | 14200 |
++---------+-------+
+36 rows in set (0.00 sec)
+
+mysql>
+
+18)
+
+mysql> select empname,allow from emp,salary
+    -> where emp.empcode=salary.empcode and (salary.allow between 1000 and 1500);
++---------+-------+
+| empname | allow |
++---------+-------+
+| Tiwari  |  1240 |
+| Tiwari  |  1240 |
+| John    |  1230 |
+| John    |  1230 |
+| Shah    |  1220 |
+| Shah    |  1220 |
+| Roy     |  1420 |
+| Roy     |  1420 |
+| Wilson  |  1220 |
+| Wilson  |  1220 |
+| Jain    |  1240 |
+| Jain    |  1240 |
+| Gupta   |  1260 |
+| Gupta   |  1260 |
+| Murthy  |  1470 |
+| Murthy  |  1470 |
+| Menon   |  1240 |
+| Menon   |  1240 |
+| Khan    |  1190 |
+| Khan    |  1190 |
+| Sanghvi |  1240 |
+| Sanghvi |  1240 |
+| Singh   |  1430 |
+| Singh   |  1430 |
+| Patil   |  1230 |
+| Patil   |  1230 |
+| Shroff  |  1200 |
+| Shroff  |  1200 |
+| Naik    |  1180 |
+| Naik    |  1180 |
+| Kaul    |  1195 |
+| Kaul    |  1195 |
+| Rai     |  1180 |
+| Rai     |  1180 |
+| Sinha   |  1460 |
+| Sinha   |  1460 |
+| Ahmad   |  1420 |
+| Ahmad   |  1420 |
++---------+-------+
+38 rows in set (0.00 sec)
+
+
+19)
+
+mysql> select empname from emp
+    -> where empname like "%I" or empname like "%y";
++---------+
+| empname |
++---------+
+| Tiwari  |
+| Roy     |
+| Murthy  |
+| Sanghvi |
+| Reddy   |
+| Rai     |
++---------+
+6 rows in set (0.00 sec)
+
+20)
+
+mysql> select empname,experience from emp
+    -> where experience>25;
++---------+------------+
+| empname | experience |
++---------+------------+
+| John    |         28 |
+| Shah    |         39 |
+| Roy     |         41 |
+| Wilson  |         41 |
+| Jain    |         41 |
+| Gupta   |         41 |
+| Murthy  |         41 |
+| Menon   |         41 |
+| Khan    |         40 |
+| Sanghvi |         29 |
+| Reddy   |         41 |
+| Singh   |         41 |
+| Patil   |         32 |
+| Shroff  |         41 |
+| Naik    |         41 |
+| Kaul    |         40 |
+| Sinha   |         30 |
+| Ahmad   |         30 |
++---------+------------+
+18 rows in set (0.00 sec)
+
+21)
+
+mysql> select empname,designame,experience from emp,desig
+    -> where emp.desigcode=desig.desigcode and desig.desigcode='slmn' and experience between 20 and 30;
++---------+-----------+------------+
+| empname | designame | experience |
++---------+-----------+------------+
+| Sinha   | Sales Man |         30 |
+| Ahmad   | Sales Man |         30 |
++---------+-----------+------------+
+2 rows in set (0.00 sec)
+
+
+22)
+mysql> select empname,basic,basic/2 as 'half_of_basic' from emp,salary
+    -> where emp.empcode=salary.empcode ;
++---------+-------+---------------+
+| empname | basic | half_of_basic |
++---------+-------+---------------+
+| Tiwari  | 11800 |     5900.0000 |
+| Tiwari  | 12400 |     6200.0000 |
+| Tiwari  | 12400 |     6200.0000 |
+| John    | 11700 |     5850.0000 |
+| John    | 12300 |     6150.0000 |
+| John    | 12300 |     6150.0000 |
+| Shah    | 11600 |     5800.0000 |
+| Shah    | 12200 |     6100.0000 |
+| Shah    | 12200 |     6100.0000 |
+| Roy     | 13400 |     6700.0000 |
+| Roy     | 14200 |     7100.0000 |
+| Roy     | 14200 |     7100.0000 |
+| Wilson  | 11400 |     5700.0000 |
+| Wilson  | 12200 |     6100.0000 |
+| Wilson  | 12200 |     6100.0000 |
+| Jain    | 12000 |     6000.0000 |
+| Jain    | 12400 |     6200.0000 |
+| Jain    | 12400 |     6200.0000 |
+| Gupta   | 11900 |     5950.0000 |
+| Gupta   | 12600 |     6300.0000 |
+| Gupta   | 12600 |     6300.0000 |
+| Murthy  | 13900 |     6950.0000 |
+| Murthy  | 14700 |     7350.0000 |
+| Murthy  | 14700 |     7350.0000 |
+| Menon   | 11800 |     5900.0000 |
+| Menon   | 12400 |     6200.0000 |
+| Menon   | 12400 |     6200.0000 |
+| Khan    | 11300 |     5650.0000 |
+| Khan    | 11900 |     5950.0000 |
+| Khan    | 11900 |     5950.0000 |
+| Sanghvi | 11900 |     5950.0000 |
+| Sanghvi | 12400 |     6200.0000 |
+| Sanghvi | 12400 |     6200.0000 |
+| Reddy   | 30000 |    15000.0000 |
+| Reddy   | 32000 |    16000.0000 |
+| Reddy   | 32000 |    16000.0000 |
+| Singh   | 13400 |     6700.0000 |
+| Singh   | 14300 |     7150.0000 |
+| Singh   | 14300 |     7150.0000 |
+| Patil   | 11700 |     5850.0000 |
+| Patil   | 12300 |     6150.0000 |
+| Patil   | 12300 |     6150.0000 |
+| Shroff  | 11500 |     5750.0000 |
+| Shroff  | 12000 |     6000.0000 |
+| Shroff  | 12000 |     6000.0000 |
+| Naik    | 11200 |     5600.0000 |
+| Naik    | 11800 |     5900.0000 |
+| Naik    | 11800 |     5900.0000 |
+| Kaul    | 11450 |     5725.0000 |
+| Kaul    | 11950 |     5975.0000 |
+| Kaul    | 11950 |     5975.0000 |
+| Rai     | 11100 |     5550.0000 |
+| Rai     | 11800 |     5900.0000 |
+| Rai     | 11800 |     5900.0000 |
+| Sinha   | 13950 |     6975.0000 |
+| Sinha   | 14600 |     7300.0000 |
+| Sinha   | 14600 |     7300.0000 |
+| Ahmad   | 13400 |     6700.0000 |
+| Ahmad   | 14200 |     7100.0000 |
+| Ahmad   | 14200 |     7100.0000 |
++---------+-------+---------------+
+60 rows in set (0.00 sec)
+
+mysql>
+
+23)
+mysql> select empname,(basic+allow-deduct) as 'take_home_pay'from emp,salary where emp.empcode=salary.empcode and salmonth=(select max(salmonth) from salary);
++---------+---------------+
+| empname | take_home_pay |
++---------+---------------+
+| Tiwari  |         13090 |
+| John    |         12980 |
+| Shah    |         12870 |
+| Roy     |         14970 |
+| Wilson  |         12870 |
+| Jain    |         13090 |
+| Gupta   |         13310 |
+| Murthy  |         15520 |
+| Menon   |         13090 |
+| Khan    |         12540 |
+| Sanghvi |         13090 |
+| Reddy   |         33950 |
+| Singh   |         15080 |
+| Patil   |         12980 |
+| Shroff  |         12650 |
+| Naik    |         12430 |
+| Kaul    |         12595 |
+| Rai     |         12430 |
+| Sinha   |         15410 |
+| Ahmad   |         14970 |
++---------+---------------+
+20 rows in set (0.03 sec)
+
+24)
+
+
+mysql> select empname,(basic+allow-deduct)as 'take_home_pay',deptcode from emp join salary using(empcode)
+    -> where salmonth=(select max(salmonth) from salary) and deptcode='acct';
++---------+---------------+----------+
+| empname | take_home_pay | deptcode |
++---------+---------------+----------+
+| John    |         12980 | ACCT     |
+| Menon   |         13090 | ACCT     |
+| Reddy   |         33950 | ACCT     |
+| Kaul    |         12595 | ACCT     |
++---------+---------------+----------+
+4 rows in set (0.05 sec)
+
+
+25)
+mysql> select empname,age from emp;
++---------+------+
+| empname | age  |
++---------+------+
+| Tiwari  |   33 |
+| John    |   53 |
+| Shah    |   62 |
+| Roy     |   65 |
+| Wilson  |   66 |
+| Jain    |   67 |
+| Gupta   |   65 |
+| Murthy  |   62 |
+| Menon   |   55 |
+| Khan    |   65 |
+| Sanghvi |   42 |
+| Reddy   |   62 |
+| Singh   |   66 |
+| Patil   |   57 |
+| Shroff  |   66 |
+| Naik    |   64 |
+| Kaul    |   65 |
+| Rai     |   34 |
+| Sinha   |   52 |
+| Ahmad   |   52 |
++---------+------+
+20 rows in set (0.00 sec)
+
+
+26)
+mysql> select empname,deptname,age from emp,dept where emp.deptcode=dept.deptcode and dept.deptcode='acct'
+    -> order by age;
++---------+----------+------+
+| empname | deptname | age  |
++---------+----------+------+
+| John    | Accounts |   53 |
+| Menon   | Accounts |   55 |
+| Reddy   | Accounts |   62 |
+| Kaul    | Accounts |   65 |
++---------+----------+------+
+4 rows in set (0.00 sec)
+
+mysql> select empname,deptname,age from emp,dept where emp.deptcode=dept.deptcode and dept.deptcode='acct'
+    -> order by empname
+    -> ;
++---------+----------+------+
+| empname | deptname | age  |
++---------+----------+------+
+| John    | Accounts |   53 |
+| Kaul    | Accounts |   65 |
+| Menon   | Accounts |   55 |
+| Reddy   | Accounts |   62 |
++---------+----------+------+
+4 rows in set (0.00 sec)
+
+27)
+
+
+mysql> SELECT * FROM emp WHERE supcode=(select empcode from emp where empname='reddy');
++---------+---------+----------+------------+------------+------+-----------+---------+-----------+------------+----------+------+------------+
+| empcode | empname | deptcode | birthdate  | joindate   | sex  | desigcode | supcode | gradecode | gradelevel | basicpay | age  | experience |
++---------+---------+----------+------------+------------+------+-----------+---------+-----------+------------+----------+------+------------+
+| 7566    | Jain    | PRCH     | 1955-01-24 | 1981-04-02 | F    | MNGR      | 7839    | GC6       | GL2        |    12400 |   67 |         41 |
+| 7698    | Murthy  | SALE     | 1960-09-16 | 1981-05-01 | F    | MNGR      | 7839    | GC6       | GL1        |    14700 |   62 |         41 |
+| 7782    | Menon   | ACCT     | 1967-08-30 | 1981-06-09 | M    | MNGR      | 7839    | GC6       | GL2        |    12400 |   55 |         41 |
+| 7902    | Naik    | PRCH     | 1958-02-20 | 1981-12-03 | M    | MNGR      | 7839    | GC6       | GL2        |    11800 |   64 |         41 |
++---------+---------+----------+------------+------------+------+-----------+---------+-----------+------------+----------+------+------------+
+4 rows in set (0.02 sec)
+
+28)
+
+mysql> select supcode,count(*) from emp
+    -> group by supcode
+    -> order by count(*) desc;
++---------+----------+
+| supcode | count(*) |
++---------+----------+
+| 7698    |        6 |
+| 7782    |        4 |
+| 7839    |        4 |
+| 7566    |        2 |
+| 7902    |        2 |
+| NULL    |        1 |
+| 7788    |        1 |
++---------+----------+
+7 rows in set (0.00 sec)
+
+29)
+
+mysql> select supcode,count(empcode) from emp
+    -> group by supcode
+    -> having (count(empcode)>3)
+    -> ;
++---------+----------------+
+| supcode | count(empcode) |
++---------+----------------+
+| 7698    |              6 |
+| 7782    |              4 |
+| 7839    |              4 |
++---------+----------------+
+3 rows in set (0.00 sec)
+
+30)
+
+mysql> SELECT gradecode,MAX(basicpay),MIN(basicpay) FROM emp GROUP BY gradecode;
++-----------+---------------+---------------+
+| gradecode | MAX(basicpay) | MIN(basicpay) |
++-----------+---------------+---------------+
+| GC1       |         32000 |         32000 |
+| GC6       |         14700 |         11800 |
++-----------+---------------+---------------+
+2 rows in set (0.04 sec)
+
+31)
+
+mysql> SELECT e.empcode, e.empname, sup.empcode as 'scode', sup.empname as 'sup_name' FROM emp e JOIN
+    -> (SELECT * FROM emp WHERE empcode IN(SELECT DISTINCT supcode FROM emp)) AS sup
+    -> ON e.supcode=sup.empcode;
++---------+---------+-------+----------+
+| empcode | empname | scode | sup_name |
++---------+---------+-------+----------+
+| 7788    | Khan    | 7566  | Jain     |
+| 7802    | Sanghvi | 7566  | Jain     |
+| 7499    | Roy     | 7698  | Murthy   |
+| 7521    | Wilson  | 7698  | Murthy   |
+| 7654    | Gupta   | 7698  | Murthy   |
+| 7844    | Singh   | 7698  | Murthy   |
+| 7900    | Shroff  | 7698  | Murthy   |
+| 9902    | Ahmad   | 7698  | Murthy   |
+| 6569    | Tiwari  | 7782  | Menon    |
+| 7934    | Kaul    | 7782  | Menon    |
+| 7939    | Rai     | 7782  | Menon    |
+| 7999    | Sinha   | 7782  | Menon    |
+| 7876    | Patil   | 7788  | Khan     |
+| 7566    | Jain    | 7839  | Reddy    |
+| 7698    | Murthy  | 7839  | Reddy    |
+| 7782    | Menon   | 7839  | Reddy    |
+| 7902    | Naik    | 7839  | Reddy    |
+| 7192    | John    | 7902  | Naik     |
+| 7369    | Shah    | 7902  | Naik     |
++---------+---------+-------+----------+
+19 rows in set (0.00 sec)
+
+32)
+
+
+
+
+
+33) 
+
+
+mysql> select * from emp where empcode not in ( select distinct empcode from history);
++---------+---------+----------+------------+------------+------+-----------+---------+-----------+------------+----------+------+------------+
+| empcode | empname | deptcode | birthdate  | joindate   | sex  | desigcode | supcode | gradecode | gradelevel | basicpay | age  | experience |
++---------+---------+----------+------------+------------+------+-----------+---------+-----------+------------+----------+------+------------+
+| 6569    | Tiwari  | STOR     | 1989-08-19 | 2010-08-21 | M    | MNGR      | 7782    | GC6       | GL2        |    12400 |   33 |         12 |
+| 7192    | John    | ACCT     | 1968-11-05 | 1994-12-03 | M    | CLRK      | 7902    | GC6       | GL2        |    12300 |   53 |         28 |
+| 7802    | Sanghvi | STOR     | 1980-05-06 | 1993-01-01 | M    | MNGR      | 7566    | GC6       | GL2        |    12400 |   42 |         29 |
+| 7876    | Patil   | PRCH     | 1965-09-02 | 1990-12-17 | M    | CLRK      | 7788    | GC6       | GL2        |    12300 |   57 |         32 |
+| 7939    | Rai     | PRCH     | 1988-08-10 | 2012-12-06 | M    | CLRK      | 7782    | GC6       | GL2        |    11800 |   34 |         10 |
+| 7999    | Sinha   | SALE     | 1970-04-11 | 1992-02-20 | M    | SLMN      | 7782    | GC6       | GL1        |    14600 |   52 |         30 |
+| 9902    | Ahmad   | SALE     | 1970-02-16 | 1992-04-17 | M    | SLMN      | 7698    | GC6       | GL1        |    14200 |   52 |         30 |
++---------+---------+----------+------------+------------+------+-----------+---------+-----------+------------+----------+------+------------+
+7 rows in set (0.91 sec)
+
+
+
+34)
+mysql> select distinct empcode,empname,count(changedate) as
+    -> no_of_prom from history
+    -> join emp using (empcode)
+    -> group by empcode order by no_of_prom desc;
++---------+---------+------------+
+| empcode | empname | no_of_prom |
++---------+---------+------------+
+| 7839    | Reddy   |          9 |
+| 7499    | Roy     |          5 |
+| 7698    | Murthy  |          5 |
+| 7844    | Singh   |          5 |
+| 7369    | Shah    |          4 |
+| 7521    | Wilson  |          4 |
+| 7566    | Jain    |          4 |
+| 7654    | Gupta   |          4 |
+| 7782    | Menon   |          4 |
+| 7788    | Khan    |          4 |
+| 7900    | Shroff  |          4 |
+| 7902    | Naik    |          4 |
+| 7934    | Kaul    |          4 |
++---------+---------+------------+
+13 rows in set (0.00 sec)
+
+
+35)
+
+mysql> select empcode,empname,changedate from history join emp using (empcode) where year(changedate)=1991;
++---------+---------+------------+
+| empcode | empname | changedate |
++---------+---------+------------+
+| 7499    | Roy     | 1991-02-20 |
+| 7521    | Wilson  | 1991-02-22 |
+| 7566    | Jain    | 1991-12-31 |
+| 7654    | Gupta   | 1991-09-28 |
+| 7698    | Murthy  | 1991-05-01 |
+| 7782    | Menon   | 1991-06-09 |
+| 7844    | Singh   | 1991-09-08 |
+| 7900    | Shroff  | 1991-12-03 |
+| 7902    | Naik    | 1991-12-03 |
++---------+---------+------------+
+9 rows in 
+set (0.00 sec)
+
+36)
+
+
+mysql> select empcode,empname,deptcode,deptname,budget,basicpay from dept join emp using (deptcode)
+    -> group by deptcode order by deptcode;
++---------+---------+----------+----------+--------+----------+
+| empcode | empname | deptcode | deptname | budget | basicpay |
++---------+---------+----------+----------+--------+----------+
+| 7192    | John    | ACCT     | Accounts |     19 |    12300 |
+| 7369    | Shah    | PRCH     | Purchase |     25 |    12200 |
+| 7499    | Roy     | SALE     | Sales    |     39 |    14200 |
+| 6569    | Tiwari  | STOR     | Stores   |     33 |    12400 |
++---------+---------+----------+----------+--------+----------+
+4 rows in set (0.00 sec)
+
+
+
+37)
+
+mysql> select empcode,UPPER(empname) from emp;
++---------+----------------+
+| empcode | UPPER(empname) |
++---------+----------------+
+| 6569    | TIWARI         |
+| 7192    | JOHN           |
+| 7369    | SHAH           |
+| 7499    | ROY            |
+| 7521    | WILSON         |
+| 7566    | JAIN           |
+| 7654    | GUPTA          |
+| 7698    | MURTHY         |
+| 7782    | MENON          |
+| 7788    | KHAN           |
+| 7802    | SANGHVI        |
+| 7839    | REDDY          |
+| 7844    | SINGH          |
+| 7876    | PATIL          |
+| 7900    | SHROFF         |
+| 7902    | NAIK           |
+| 7934    | KAUL           |
+| 7939    | RAI            |
+| 7999    | SINHA          |
+| 9902    | AHMAD          |
++---------+----------------+
+20 rows in set (0.04 sec)
+
+38)
+
+mysql> select * from emp where basicpay > (select basicpay from emp where empname='jain');
++---------+---------+----------+------------+------------+------+-----------+---------+-----------+------------+----------+------+------------+
+| empcode | empname | deptcode | birthdate  | joindate   | sex  | desigcode | supcode | gradecode | gradelevel | basicpay | age  | experience |
++---------+---------+----------+------------+------------+------+-----------+---------+-----------+------------+----------+------+------------+
+| 7499    | Roy     | SALE     | 1957-09-27 | 1981-02-20 | M    | SLMN      | 7698    | GC6       | GL1        |    14200 |   65 |         41 |
+| 7654    | Gupta   | SALE     | 1957-01-22 | 1981-09-28 | M    | SLMN      | 7698    | GC6       | GL2        |    12600 |   65 |         41 |
+| 7698    | Murthy  | SALE     | 1960-09-16 | 1981-05-01 | F    | MNGR      | 7839    | GC6       | GL1        |    14700 |   62 |         41 |
+| 7839    | Reddy   | ACCT     | 1959-12-12 | 1981-07-17 | M    | PRES      | NULL    | GC1       | GL1        |    32000 |   62 |         41 |
+| 7844    | Singh   | SALE     | 1956-09-09 | 1981-09-08 | F    | SLMN      | 7698    | GC6       | GL1        |    14300 |   66 |         41 |
+| 7999    | Sinha   | SALE     | 1970-04-11 | 1992-02-20 | M    | SLMN      | 7782    | GC6       | GL1        |    14600 |   52 |         30 |
+| 9902    | Ahmad   | SALE     | 1970-02-16 | 1992-04-17 | M    | SLMN      | 7698    | GC6       | GL1        |    14200 |   52 |         30 |
++---------+---------+----------+------------+------------+------+-----------+---------+-----------+------------+----------+------+------------+
+7 rows in set (0.00 sec)
+
+
+
+
+39)
+
+mysql> select * from emp where basicpay > (select avg(basicpay)from emp where basicpay between 11000 and 12000);
++---------+---------+----------+------------+------------+------+-----------+---------+-----------+------------+----------+------+------------+
+| empcode | empname | deptcode | birthdate  | joindate   | sex  | desigcode | supcode | gradecode | gradelevel | basicpay | age  | experience |
++---------+---------+----------+------------+------------+------+-----------+---------+-----------+------------+----------+------+------------+
+| 6569    | Tiwari  | STOR     | 1989-08-19 | 2010-08-21 | M    | MNGR      | 7782    | GC6       | GL2        |    12400 |   33 |         12 |
+| 7192    | John    | ACCT     | 1968-11-05 | 1994-12-03 | M    | CLRK      | 7902    | GC6       | GL2        |    12300 |   53 |         28 |
+| 7369    | Shah    | PRCH     | 1960-05-25 | 1983-12-17 | M    | CLRK      | 7902    | GC6       | GL2        |    12200 |   62 |         39 |
+| 7499    | Roy     | SALE     | 1957-09-27 | 1981-02-20 | M    | SLMN      | 7698    | GC6       | GL1        |    14200 |   65 |         41 |
+| 7521    | Wilson  | STOR     | 1956-03-18 | 1981-02-22 | M    | MNGR      | 7698    | GC6       | GL2        |    12200 |   66 |         41 |
+| 7566    | Jain    | PRCH     | 1955-01-24 | 1981-04-02 | F    | MNGR      | 7839    | GC6       | GL2        |    12400 |   67 |         41 |
+| 7654    | Gupta   | SALE     | 1957-01-22 | 1981-09-28 | M    | SLMN      | 7698    | GC6       | GL2        |    12600 |   65 |         41 |
+| 7698    | Murthy  | SALE     | 1960-09-16 | 1981-05-01 | F    | MNGR      | 7839    | GC6       | GL1        |    14700 |   62 |         41 |
+| 7782    | Menon   | ACCT     | 1967-08-30 | 1981-06-09 | M    | MNGR      | 7839    | GC6       | GL2        |    12400 |   55 |         41 |
+| 7788    | Khan    | PRCH     | 1957-02-03 | 1982-12-09 | M    | SPRV      | 7566    | GC6       | GL2        |    11900 |   65 |         40 |
+| 7802    | Sanghvi | STOR     | 1980-05-06 | 1993-01-01 | M    | MNGR      | 7566    | GC6       | GL2        |    12400 |   42 |         29 |
+| 7839    | Reddy   | ACCT     | 1959-12-12 | 1981-07-17 | M    | PRES      | NULL    | GC1       | GL1        |    32000 |   62 |         41 |
+| 7844    | Singh   | SALE     | 1956-09-09 | 1981-09-08 | F    | SLMN      | 7698    | GC6       | GL1        |    14300 |   66 |         41 |
+| 7876    | Patil   | PRCH     | 1965-09-02 | 1990-12-17 | M    | CLRK      | 7788    | GC6       | GL2        |    12300 |   57 |         32 |
+| 7900    | Shroff  | SALE     | 1956-06-28 | 1981-12-03 | M    | CLRK      | 7698    | GC6       | GL2        |    12000 |   66 |         41 |
+| 7934    | Kaul    | ACCT     | 1957-05-02 | 1982-01-23 | M    | CLRK      | 7782    | GC6       | GL2        |    11950 |   65 |         40 |
+| 7999    | Sinha   | SALE     | 1970-04-11 | 1992-02-20 | M    | SLMN      | 7782    | GC6       | GL1        |    14600 |   52 |         30 |
+| 9902    | Ahmad   | SALE     | 1970-02-16 | 1992-04-17 | M    | SLMN      | 7698    | GC6       | GL1        |    14200 |   52 |         30 |
++---------+---------+----------+------------+------------+------+-----------+---------+-----------+------------+----------+------+------------+
+18 rows in set (0.95 sec)
+
+
+40)
+
+mysql> select * from emp where basicpay > (select avg(basicpay) from emp);
++---------+---------+----------+------------+------------+------+-----------+---------+-----------+------------+----------+------+------------+
+| empcode | empname | deptcode | birthdate  | joindate   | sex  | desigcode | supcode | gradecode | gradelevel | basicpay | age  | experience |
++---------+---------+----------+------------+------------+------+-----------+---------+-----------+------------+----------+------+------------+
+| 7499    | Roy     | SALE     | 1957-09-27 | 1981-02-20 | M    | SLMN      | 7698    | GC6       | GL1        |    14200 |   65 |         41 |
+| 7698    | Murthy  | SALE     | 1960-09-16 | 1981-05-01 | F    | MNGR      | 7839    | GC6       | GL1        |    14700 |   62 |         41 |
+| 7839    | Reddy   | ACCT     | 1959-12-12 | 1981-07-17 | M    | PRES      | NULL    | GC1       | GL1        |    32000 |   62 |         41 |
+| 7844    | Singh   | SALE     | 1956-09-09 | 1981-09-08 | F    | SLMN      | 7698    | GC6       | GL1        |    14300 |   66 |         41 |
+| 7999    | Sinha   | SALE     | 1970-04-11 | 1992-02-20 | M    | SLMN      | 7782    | GC6       | GL1        |    14600 |   52 |         30 |
+| 9902    | Ahmad   | SALE     | 1970-02-16 | 1992-04-17 | M    | SLMN      | 7698    | GC6       | GL1        |    14200 |   52 |         30 |
++---------+---------+----------+------------+------------+------+-----------+---------+-----------+------------+----------+------+------------+
+6 rows in set (0.00 sec)
+
+41)
+
+
+mysql> select * from emp where basicpay > (select avg(basicpay) from emp )order by basicpay desc;
++---------+---------+----------+------------+------------+------+-----------+---------+-----------+------------+----------+------+------------+
+| empcode | empname | deptcode | birthdate  | joindate   | sex  | desigcode | supcode | gradecode | gradelevel | basicpay | age  | experience |
++---------+---------+----------+------------+------------+------+-----------+---------+-----------+------------+----------+------+------------+
+| 7839    | Reddy   | ACCT     | 1959-12-12 | 1981-07-17 | M    | PRES      | NULL    | GC1       | GL1        |    32000 |   62 |         41 |
+| 7698    | Murthy  | SALE     | 1960-09-16 | 1981-05-01 | F    | MNGR      | 7839    | GC6       | GL1        |    14700 |   62 |         41 |
+| 7999    | Sinha   | SALE     | 1970-04-11 | 1992-02-20 | M    | SLMN      | 7782    | GC6       | GL1        |    14600 |   52 |         30 |
+| 7844    | Singh   | SALE     | 1956-09-09 | 1981-09-08 | F    | SLMN      | 7698    | GC6       | GL1        |    14300 |   66 |         41 |
+| 7499    | Roy     | SALE     | 1957-09-27 | 1981-02-20 | M    | SLMN      | 7698    | GC6       | GL1        |    14200 |   65 |         41 |
+| 9902    | Ahmad   | SALE     | 1970-02-16 | 1992-04-17 | M    | SLMN      | 7698    | GC6       | GL1        |    14200 |   52 |         30 |
++---------+---------+----------+------------+------------+------+-----------+---------+-----------+------------+----------+------+------------+
+6 rows in set (0.00 sec)
+
+42)
+
+
+mysql> select * from emp where basicpay <> (select max(basicpay) from emp );
++---------+---------+----------+------------+------------+------+-----------+---------+-----------+------------+----------+------+------------+
+| empcode | empname | deptcode | birthdate  | joindate   | sex  | desigcode | supcode | gradecode | gradelevel | basicpay | age  | experience |
++---------+---------+----------+------------+------------+------+-----------+---------+-----------+------------+----------+------+------------+
+| 6569    | Tiwari  | STOR     | 1989-08-19 | 2010-08-21 | M    | MNGR      | 7782    | GC6       | GL2        |    12400 |   33 |         12 |
+| 7192    | John    | ACCT     | 1968-11-05 | 1994-12-03 | M    | CLRK      | 7902    | GC6       | GL2        |    12300 |   53 |         28 |
+| 7369    | Shah    | PRCH     | 1960-05-25 | 1983-12-17 | M    | CLRK      | 7902    | GC6       | GL2        |    12200 |   62 |         39 |
+| 7499    | Roy     | SALE     | 1957-09-27 | 1981-02-20 | M    | SLMN      | 7698    | GC6       | GL1        |    14200 |   65 |         41 |
+| 7521    | Wilson  | STOR     | 1956-03-18 | 1981-02-22 | M    | MNGR      | 7698    | GC6       | GL2        |    12200 |   66 |         41 |
+| 7566    | Jain    | PRCH     | 1955-01-24 | 1981-04-02 | F    | MNGR      | 7839    | GC6       | GL2        |    12400 |   67 |         41 |
+| 7654    | Gupta   | SALE     | 1957-01-22 | 1981-09-28 | M    | SLMN      | 7698    | GC6       | GL2        |    12600 |   65 |         41 |
+| 7698    | Murthy  | SALE     | 1960-09-16 | 1981-05-01 | F    | MNGR      | 7839    | GC6       | GL1        |    14700 |   62 |         41 |
+| 7782    | Menon   | ACCT     | 1967-08-30 | 1981-06-09 | M    | MNGR      | 7839    | GC6       | GL2        |    12400 |   55 |         41 |
+| 7788    | Khan    | PRCH     | 1957-02-03 | 1982-12-09 | M    | SPRV      | 7566    | GC6       | GL2        |    11900 |   65 |         40 |
+| 7802    | Sanghvi | STOR     | 1980-05-06 | 1993-01-01 | M    | MNGR      | 7566    | GC6       | GL2        |    12400 |   42 |         29 |
+| 7844    | Singh   | SALE     | 1956-09-09 | 1981-09-08 | F    | SLMN      | 7698    | GC6       | GL1        |    14300 |   66 |         41 |
+| 7876    | Patil   | PRCH     | 1965-09-02 | 1990-12-17 | M    | CLRK      | 7788    | GC6       | GL2        |    12300 |   57 |         32 |
+| 7900    | Shroff  | SALE     | 1956-06-28 | 1981-12-03 | M    | CLRK      | 7698    | GC6       | GL2        |    12000 |   66 |         41 |
+| 7902    | Naik    | PRCH     | 1958-02-20 | 1981-12-03 | M    | MNGR      | 7839    | GC6       | GL2        |    11800 |   64 |         41 |
+| 7934    | Kaul    | ACCT     | 1957-05-02 | 1982-01-23 | M    | CLRK      | 7782    | GC6       | GL2        |    11950 |   65 |         40 |
+| 7939    | Rai     | PRCH     | 1988-08-10 | 2012-12-06 | M    | CLRK      | 7782    | GC6       | GL2        |    11800 |   34 |         10 |
+| 7999    | Sinha   | SALE     | 1970-04-11 | 1992-02-20 | M    | SLMN      | 7782    | GC6       | GL1        |    14600 |   52 |         30 |
+| 9902    | Ahmad   | SALE     | 1970-02-16 | 1992-04-17 | M    | SLMN      | 7698    | GC6       | GL1        |    14200 |   52 |         30 |
++---------+---------+----------+------------+------------+------+-----------+---------+-----------+------------+----------+------+------------+
+19 rows in set (0.00 sec)
+
+
+43)
+
+mysql> select * from emp e where basicpay = (select max(basicpay) from emp where deptcode= e.deptcode);
++---------+---------+----------+------------+------------+------+-----------+---------+-----------+------------+----------+------+------------+
+| empcode | empname | deptcode | birthdate  | joindate   | sex  | desigcode | supcode | gradecode | gradelevel | basicpay | age  | experience |
++---------+---------+----------+------------+------------+------+-----------+---------+-----------+------------+----------+------+------------+
+| 6569    | Tiwari  | STOR     | 1989-08-19 | 2010-08-21 | M    | MNGR      | 7782    | GC6       | GL2        |    12400 |   33 |         12 |
+| 7566    | Jain    | PRCH     | 1955-01-24 | 1981-04-02 | F    | MNGR      | 7839    | GC6       | GL2        |    12400 |   67 |         41 |
+| 7698    | Murthy  | SALE     | 1960-09-16 | 1981-05-01 | F    | MNGR      | 7839    | GC6       | GL1        |    14700 |   62 |         41 |
+| 7802    | Sanghvi | STOR     | 1980-05-06 | 1993-01-01 | M    | MNGR      | 7566    | GC6       | GL2        |    12400 |   42 |         29 |
+| 7839    | Reddy   | ACCT     | 1959-12-12 | 1981-07-17 | M    | PRES      | NULL    | GC1       | GL1        |    32000 |   62 |         41 |
++---------+---------+----------+------------+------------+------+-----------+---------+-----------+------------+----------+------+------------+
+5 rows in set (0.00 sec)
+
+44)
+
+mysql> select empcode,empname,basicpay from emp
+    -> where basicpay < (select max(basicpay) from emp) order by basicpay desc limit 1;
++---------+---------+----------+
+| empcode | empname | basicpay |
++---------+---------+----------+
+| 7698    | Murthy  |    14700 |
++---------+---------+----------+
+1 row in set (0.00 sec)
+
+
+45)
+
+mysql> select empcode,empname,basicpay from emp
+    -> where empcode= basicpay < (select max(basicpay) from emp) order by basicpay desc limit 4,1;
++---------+---------+----------+
+| empcode | empname | basicpay |
++---------+---------+----------+
+| 7499    | Roy     |    14200 |
++---------+---------+----------+
+1 row in set (0.01 sec)
+
+
+46)
+
+mysql> select empcode,empname,sex,basicpay from emp where sex='f' order by basicpay desc limit 1;
++---------+---------+------+----------+
+| empcode | empname | sex  | basicpay |
++---------+---------+------+----------+
+| 7698    | Murthy  | F    |    14700 |
++---------+---------+------+----------+
+1 row in set (0.00 sec)
+
+
+47)
+
+mysql> select empcode,empname,sex,deptname,basicpay from emp join dept using (deptcode) where sex='f' order by basicpay desc limit 1;
++---------+---------+------+----------+----------+
+| empcode | empname | sex  | deptname | basicpay |
++---------+---------+------+----------+----------+
+| 7698    | Murthy  | F    | Sales    |    14700 |
++---------+---------+------+----------+----------+
+1 row in set (0.00 sec)
+
+48)
+
+mysql>  select * from emp
+    -> where deptcode=(select deptcode from emp where sex='f' order by basicpay desc limit 1)
+    -> and
+    -> desigcode='mngr';
++---------+---------+----------+------------+------------+------+-----------+---------+-----------+------------+----------+------+------------+
+| empcode | empname | deptcode | birthdate  | joindate   | sex  | desigcode | supcode | gradecode | gradelevel | basicpay | age  | experience |
++---------+---------+----------+------------+------------+------+-----------+---------+-----------+------------+----------+------+------------+
+| 7698    | Murthy  | SALE     | 1960-09-16 | 1981-05-01 | F    | MNGR      | 7839    | GC6       | GL1        |    14700 |   62 |         41 |
++---------+---------+----------+------------+------------+------+-----------+---------+-----------+------------+----------+------+------------+
+1 row in set (0.04 sec)
+
+49)
+
+
+
+mysql>  select e. empcode,e.empname,e.sex,e.basicpay,d.deptcode,d.deptname,e.desigcode,c.designame from emp e
+    -> inner join dept d on e.deptcode=d.deptcode
+    -> inner join desig c on e.desigcode=c.desigcode
+    -> where sex='m' and basicpay>any(select s.basicpay from emp s where sex='f');
++---------+---------+------+----------+----------+----------+-----------+-----------+
+| empcode | empname | sex  | basicpay | deptcode | deptname | desigcode | designame |
++---------+---------+------+----------+----------+----------+-----------+-----------+
+| 7499    | Roy     | M    |    14200 | SALE     | Sales    | SLMN      | Sales Man |
+| 7654    | Gupta   | M    |    12600 | SALE     | Sales    | SLMN      | Sales Man |
+| 7839    | Reddy   | M    |    32000 | ACCT     | Accounts | PRES      | Personal  |
+| 7999    | Sinha   | M    |    14600 | SALE     | Sales    | SLMN      | Sales Man |
+| 9902    | Ahmad   | M    |    14200 | SALE     | Sales    | SLMN      | Sales Man |
++---------+---------+------+----------+----------+----------+-----------+-----------+
+5 rows in set (0.04 sec)
+
+
+50)
+
+
+mysql> select e.deptcode, d.deptname, e.empcode , e.empname, e.basicpay from emp e
+    -> join dept d on e.deptcode=d.deptcode
+    -> where e.basicpay >(select avg (s.basicpay) from emp s);
++----------+----------+---------+---------+----------+
+| deptcode | deptname | empcode | empname | basicpay |
++----------+----------+---------+---------+----------+
+| SALE     | Sales    | 7499    | Roy     |    14200 |
+| SALE     | Sales    | 7698    | Murthy  |    14700 |
+| ACCT     | Accounts | 7839    | Reddy   |    32000 |
+| SALE     | Sales    | 7844    | Singh   |    14300 |
+| SALE     | Sales    | 7999    | Sinha   |    14600 |
+| SALE     | Sales    | 9902    | Ahmad   |    14200 |
++----------+----------+---------+---------+----------+
+6 rows in set (0.00 sec)
+
+
+51)
+
+mysql> select e.deptcode, d.deptname, e.empcode , e.empname, e.basicpay from emp e
+    -> join dept d on e.deptcode=d.deptcode
+    -> where e.deptcode='acct' and e.basicpay<(select avg (s.basicpay) from emp s);
++----------+----------+---------+---------+----------+
+| deptcode | deptname | empcode | empname | basicpay |
++----------+----------+---------+---------+----------+
+| ACCT     | Accounts | 7192    | John    |    12300 |
+| ACCT     | Accounts | 7782    | Menon   |    12400 |
+| ACCT     | Accounts | 7934    | Kaul    |    11950 |
++----------+----------+---------+---------+----------+
+3 rows in set (0.00 sec)
+
+
+

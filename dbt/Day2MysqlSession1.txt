@@ -1,0 +1,251 @@
+
+		mysql programming day2
+
+sql + programming construct(data type,variable,operator,statement)
+
+java
+  - intract table - mysql
+  - get the data to java
+  - do logic
+  - update to the table
+
+mysql client
+  - intract table 
+  - get data
+  - do logic
+  - show on to the clinet or update to the table
+
+
+data types
+variable
+declare a int default 0;
+operator
+ set a = 10;
+statement
+  if,eleif case
+
+stored procedure
+1) how to create procedure
+    create procedure findsum()
+    begin
+    - intract table for data
+    - assign data to the variable
+    - do your logic
+    end//
+
+delimiter //
+
+In
+Out
+InOut 
+select into
+  
+--------------------------------------------------------------------
+cursor
+stored function
+stored trigger
+
+select into
+  - used to intract with table to get data 
+   - one row of data
+
+delimiter //
+drop procedure if exists getEmpDetails//
+create procedure getEmpDetails(in no int)
+begin
+select empno,ename,sal from emp where empno = no;
+end//
+
+call getEmpDetails(7839)//
+
+delimiter //
+drop procedure if exists getEmpDetails//
+create procedure getEmpDetails(in no int,out name varchar(20),out sa int)
+begin
+select ename,sal into name,sa from emp where empno = no;
+end//
+
+set @no = 7839//
+call getEmpDetails(@no,@name,@sa)//
+
+
+drop procedure if exists getEmpDetails//
+create procedure getEmpDetails(in no int)
+begin
+declare p_sa int default 0;
+declare p_eno int;
+declare p_name varchar(20);
+declare p_com float;
+select empno,ename,sal into p_eno,p_name,p_sa from emp where empno = no;
+
+       if p_sa > 3000 then
+        set p_com = p_sa*0.03;
+        else
+       set p_com = p_sa*0.01;
+       end if;
+
+    select p_eno,p_name,p_sa,p_com ;
+ 
+end//
+set @no = 7369//
+call getEmpDetails(@no)//
+
+-------------------------------------------------------------------
+
+drop procedure if exists getEmpDetails//
+create procedure getEmpDetails(in dno int)
+begin
+declare p_sa int default 0;
+declare p_eno int;
+declare p_name varchar(20);
+declare p_com float;
+select empno,ename,sal into p_eno,p_name,p_sa from emp where deptno = dno;
+
+       if p_sa > 3000 then
+        set p_com = p_sa*0.03;
+        else
+       set p_com = p_sa*0.01;
+       end if;
+
+    select p_eno,p_name,p_sa,p_com ;
+ 
+end//
+set @dno = 30//
+call getEmpDetails(@dno)//
+
+if the query return more than one row 
+- cursor
+
+int[] num = { 10,20,40,30}
+
+for(int n:num)
+{
+  syso(n)
+}
+
+cursor
+is used to hold the result set
+
+steps
+
+1 declare cursor
+2)open the cursor
+3)fetch the cursor
+4)check if you reached end of record
+   yes
+    exit
+   no
+  fetch
+5) close
+
+ --------------------------------------------------------
+using cursor selct more than one record
+ - select empno,name ,sal employee who are in deptno 30
+
+
+drop procedure if exists getEmpDetails//
+create procedure getEmpDetails(in dno int)
+begin
+declare p_sal int default 0;
+declare p_empno int;
+declare p_ename varchar(20);
+declare p_com float;
+declare eor int default 0;
+declare c1 cursor for select empno,ename,sal from emp
+                  where deptno = dno;
+declare continue handler for not found set eor = 1;
+open c1;
+emp:loop
+
+   fetch c1 into p_empno,p_ename,p_sal;
+      if(eor = 1) then
+        leave emp;
+      end if;
+    
+       if p_sal > 3000 then
+        set p_com = p_sal*0.03;
+        else
+       set p_com = p_sal*0.01;
+       end if;
+
+     select p_empno,p_ename,p_sal,p_com;
+     
+     insert into empnew values(p_empno,p_ename,p_sal,p_com);
+
+    end loop;
+close c1;
+end//
+set @dno = 30//
+call getEmpDetails(@dno)//
+
+4.20
+
+
+create table empnew
+(
+  empno int,
+  ename varchar(20),
+  sal float ,
+  com float
+)
+
+intout
+
+procedure
+
+function
+   can take only one parameter in
+   return value to caller..
+
+
+1) find the max sal from perticuler deptno;
+
+create function findmax(dno int)
+returns int DETERMINISTIC
+begin
+declare msal int;
+select max(sal) into msal from emp
+where deptno = dno;
+return msal;
+end//
+
+
+2)
+1) find which employee earning the max sal from perticuler deptno;
+
+drop function findmax//
+create function findmax(dno int)
+returns varchar(20) DETERMINISTIC
+begin
+declare p_ename varchar(20);
+select ename into p_ename from emp where sal = (select max(sal)  from emp
+where deptno = dno);
+return p_ename;
+end//
+
+sql > select findmax(30)//
+
+procedure
+in
+out
+
+INOUT
+
+drop procedure if exists getEmpDetails//
+create procedure getEmpDetails(inout m_value varchar(20))
+begin
+select ename into m_value from emp where empno = m_value;
+end//
+
+set @m_value = 7839//
+call getEmpDetails(@m_value)//
+select @m_value//
+
+-----------------------------------------------------------------
+
+
+
+
+
+
+

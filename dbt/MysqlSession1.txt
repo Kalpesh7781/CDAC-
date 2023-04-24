@@ -1,0 +1,237 @@
+		mysql Programming
+
+1)Dbms - concepts
+
+2)sql  -
+
+3) mysql programming
+  - stored procedure
+  - stored function
+  - trigger
+
+4) MongoDb
+
+PC
+method
+
+int findMax(int[] num)
+{
+variable
+operator
+- any valid java statement
+syso("max value " );
+  return max
+ - intract to the table-
+ - get data 
+ - do logic
+
+- intract to file
+- get the data
+- do logic
+}
+
+int num[] = {10,20,30,40}
+
+int max =findMax(num);
+
+
+mysql programming
+programming construct+sql
+
+{ if
+  else if
+  switch
+  while
+  variable
+  data type
+ select * from emp;
+
+}
+
+stored procedure/function
+
+triggers
+
+- the procedure get stored inside the data base
+- creating it and calling the 
+   procedure and function
+- create a trigger
+     - will get called automatically when some events occur
+
+----------------------------------------------------------------
+Advantage
+
+1) it reduce the network traffic
+2) it saves lots of time
+3) secure
+
+Stored procedure
+
+procedure selectEmp()
+{
+-sql1
+-sq;2
+-sq3
+
+}
+
+> call selectEmp()
+>stored procedure
+
+data type
+   int
+   varchar
+   float
+   
+variable
+  int x = 10
+declare y int default 0
+set y = 20;
+declare name varchar(20);
+
+operators
+
+statement
+
+----------------------------------------------------------------
+HelloWorld program
+
+create procedure <name of the procedure>
+begin
+
+end;
+delimiter;
+
+1) hello Word
+delimiter//
+drop procedure if exists sayHello//
+create procedure sayHello()
+begin
+select 'Hello' as output;
+end//
+
+2) adding to number
+drop procedure if exists addnum//
+create procedure addnum()
+begin
+declare a int default 0;
+declare b int default 0;
+declare tot int default 0;
+set a = 10;
+set b = 20;
+set tot = a+b;
+select tot as output;
+end//
+
+3) How to intract with data base
+
+drop procedure if exists empdetails//
+create procedure empdetails()
+begin
+select max(sal) from emp;
+
+end//
+
+4)drop procedure if exists empdetails//
+create procedure empdetails()
+begin
+select * from emp where empno= ;
+end//
+call empdetails(7839)//
+
+type of parameter
+IN,OUT,INOUT
+
+IN
+
+5) adding number using in parameter
+
+drop procedure if exists addnum//
+create procedure addnum(in a int, in b int )
+begin
+declare tot int default 0;
+set tot = a+b;
+select tot as output;
+end//
+@n1 = 10;
+@n2 = 20;
+
+call addnum(n1,n2)
+
+6) intract table using conditions
+
+
+7)drop procedure if exists empdetails//
+
+create procedure empdetails(in no int)
+begin
+select * from emp where empno= no;
+end//
+call empdetails(7839)//
+ 
+8) list all employee who are working on perticuler deptno
+drop procedure if exists empdetails//
+create procedure empdetails(in dno int)
+begin
+select * from emp where deptno= dno;
+end//
+call empdetails(30)//
+
+9) who is having max sal from a perticuler depto
+   
+drop procedure if exists empdetails//
+create procedure empdetails(in dno int)
+begin
+     select ename from emp where sal =(select max(sal) from emp
+        where deptno = dno);
+
+end//
+call empdetails(30)//
+
+OUT- parameters
+- will send data from procedure to caller
+- with out using return statement
+
+
+10) geting tot using  out parameter
+
+drop procedure if exists addnum//
+create procedure addnum(in a int, in b int, out tot int )
+begin
+set tot = a+b;
+end//
+@n1 = 10;
+@n2 = 20;
+call addnum(@n1,@n2,@sum);
+SQL>select @num; 
+
+11) 
+
+9) who is having max sal from a perticuler depto using 
+   select into
+   
+drop procedure if exists empdetails//
+create procedure empdetails(in dno int)
+begin
+   declare eno int;
+   declare name varchar(20);
+     select ename,empno  from emp where sal =(select max(sal) from emp
+        where deptno = dno);
+         
+ end//
+call empdetails(30)//
+
+9) add 1000 to the sal for employee whose no is 8379
+   
+drop procedure if exists empdetails//
+create procedure empdetails(in no int)
+begin
+   declare esal int default 0;
+
+     select sal into esal from  emp where empno = no;
+        set esal = esal+1000;
+        select esal; 
+ end//
+call empdetails(7839)//
+
+

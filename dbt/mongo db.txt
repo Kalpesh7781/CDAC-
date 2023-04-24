@@ -1,0 +1,644 @@
+use studentdb
+
+db.users.insert({"firstname":"steve","lastname":"haines","age":39,"gender":"m"})
+
+db.users.insertMany([{"firstname":"jaya","lastname":"kumari","age":35,"gender":"f"},{"firstname":"seeta","lastname":"kumari","age":22,"gender":"f"}])
+
+db.users.insertMany([{"firstname":"jaya","lastname":"kumari","age":35,"gender":"f"},{"firstname":"seeta","lastname":"kumari","age":22,"gender":"f"}])
+
+db.users.insert({"firstname":"ranjan","lastname":"patil","age":60,"gender":"m","address":{"street":"phase1","zipcode":"400049","state":"maharastra"}})
+
+
+db.users.find()
+{ _id: ObjectId("634b9fcd5969c77c2b65dda3"),
+  firstname: 'steve',
+  lastname: 'haines',
+  age: 39,
+  gender: 'm' }
+{ _id: ObjectId("634ba06e5969c77c2b65dda4"),
+  firstname: 'michel',
+  lastname: 'obama',
+  age: 25,
+  gender: 'm' }
+{ _id: ObjectId("634ba1165969c77c2b65dda5"),
+  firstname: 'chetan',
+  lastname: 'barot',
+  age: 30,
+  gender: 'm' }
+{ _id: ObjectId("634ba23b5969c77c2b65dda6"),
+  firstname: 'jaya',
+  lastname: 'kumari',
+  age: 35,
+  gender: 'f' }
+{ _id: ObjectId("634ba23b5969c77c2b65dda7"),
+  firstname: 'seeta',
+  lastname: 'kumari',
+  age: 22,
+  gender: 'f' }
+{ _id: ObjectId("634ba3445969c77c2b65dda8"),
+  firstname: 'shiv',
+  lastname: 'patil',
+  age: 57,
+  gender: 'm' }
+{ _id: ObjectId("634ba3445969c77c2b65dda9"),
+  firstname: 'rachana',
+  lastname: 'sharma',
+  age: 57,
+  gender: 'f' }
+{ _id: ObjectId("634ba3445969c77c2b65ddaa"),
+  firstname: 'alex',
+  lastname: 'mathew',
+  age: 48,
+  gender: 'm' }
+{ _id: ObjectId("634ba3445969c77c2b65ddab"),
+  firstname: 'gracy',
+  lastname: 'abero',
+  age: 72,
+  gender: 'f' }
+{ _id: ObjectId("634ba3be5969c77c2b65ddac"),
+  firstname: 'ranjan',
+  lastname: 'patil',
+  age: 60,
+  gender: 'm',
+  address: { street: 'phase1', zipcode: '400049', state: 'maharastra' } }
+
+
+db.users.find({}).sort({"age":1})
+{ _id: ObjectId("634ba23b5969c77c2b65dda7"),
+  firstname: 'seeta',
+  lastname: 'kumari',
+  age: 22,
+  gender: 'f' }
+{ _id: ObjectId("634ba06e5969c77c2b65dda4"),
+  firstname: 'michel',
+  lastname: 'obama',
+  age: 25,
+  gender: 'm' }
+{ _id: ObjectId("634ba1165969c77c2b65dda5"),
+  firstname: 'chetan',
+  lastname: 'barot',
+  age: 30,
+  gender: 'm' }
+{ _id: ObjectId("634ba23b5969c77c2b65dda6"),
+  firstname: 'jaya',
+  lastname: 'kumari',
+  age: 35,
+  gender: 'f' }
+{ _id: ObjectId("634b9fcd5969c77c2b65dda3"),
+  firstname: 'steve',
+  lastname: 'haines',
+  age: 39,
+  gender: 'm' }
+{ _id: ObjectId("634ba3445969c77c2b65ddaa"),
+  firstname: 'alex',
+  lastname: 'mathew',
+  age: 48,
+  gender: 'm' }
+{ _id: ObjectId("634ba3445969c77c2b65dda8"),
+  firstname: 'shiv',
+  lastname: 'patil',
+  age: 57,
+  gender: 'm' }
+{ _id: ObjectId("634ba3445969c77c2b65dda9"),
+  firstname: 'rachana',
+  lastname: 'sharma',
+  age: 57,
+  gender: 'f' }
+{ _id: ObjectId("634ba3be5969c77c2b65ddac"),
+  firstname: 'ranjan',
+  lastname: 'patil',
+  age: 60,
+  gender: 'm',
+  address: { street: 'phase1', zipcode: '400049', state: 'maharastra' } }
+{ _id: ObjectId("634ba3445969c77c2b65ddab"),
+  firstname: 'gracy',
+  lastname: 'abero',
+  age: 72,
+  gender: 'f' }
+
+
+
+db.users.find({"lastname":"kumari"})
+{ _id: ObjectId("634ba23b5969c77c2b65dda6"),
+  firstname: 'jaya',
+  lastname: 'kumari',
+  age: 35,
+  gender: 'f' }
+{ _id: ObjectId("634ba23b5969c77c2b65dda7"),
+  firstname: 'seeta',
+  lastname: 'kumari',
+  age: 22,
+  gender: 'f' }
+
+
+
+
+
+db.users.find({"gender":"m"})
+{ _id: ObjectId("634b9fcd5969c77c2b65dda3"),
+  firstname: 'steve',
+  lastname: 'haines',
+  age: 39,
+  gender: 'm' }
+{ _id: ObjectId("634ba06e5969c77c2b65dda4"),
+  firstname: 'michel',
+  lastname: 'obama',
+  age: 25,
+  gender: 'm' }
+{ _id: ObjectId("634ba1165969c77c2b65dda5"),
+  firstname: 'chetan',
+  lastname: 'barot',
+  age: 30,
+  gender: 'm' }
+{ _id: ObjectId("634ba3445969c77c2b65dda8"),
+  firstname: 'shiv',
+  lastname: 'patil',
+  age: 57,
+  gender: 'm' }
+{ _id: ObjectId("634ba3445969c77c2b65ddaa"),
+  firstname: 'alex',
+  lastname: 'mathew',
+  age: 48,
+  gender: 'm' }
+{ _id: ObjectId("634ba3be5969c77c2b65ddac"),
+  firstname: 'ranjan',
+  lastname: 'patil',
+  age: 60,
+  gender: 'm',
+  address: { street: 'phase1', zipcode: '400049', state: 'maharastra' } }
+
+
+
+db.users.find({"age":{$lt:30}},{"firstname":1,"lastname":1,"age":1})
+{ _id: ObjectId("634ba06e5969c77c2b65dda4"),
+  firstname: 'michel',
+  lastname: 'obama',
+  age: 25 }
+{ _id: ObjectId("634ba23b5969c77c2b65dda7"),
+  firstname: 'seeta',
+  lastname: 'kumari',
+  age: 22 }
+
+
+
+db.users.find({"age":{$gt:30}})
+{ _id: ObjectId("634b9fcd5969c77c2b65dda3"),
+  firstname: 'steve',
+  lastname: 'haines',
+  age: 39,
+  gender: 'm' }
+{ _id: ObjectId("634ba23b5969c77c2b65dda6"),
+  firstname: 'jaya',
+  lastname: 'kumari',
+  age: 35,
+  gender: 'f' }
+{ _id: ObjectId("634ba3445969c77c2b65dda8"),
+  firstname: 'shiv',
+  lastname: 'patil',
+  age: 57,
+  gender: 'm' }
+{ _id: ObjectId("634ba3445969c77c2b65dda9"),
+  firstname: 'rachana',
+  lastname: 'sharma',
+  age: 57,
+  gender: 'f' }
+{ _id: ObjectId("634ba3445969c77c2b65ddaa"),
+  firstname: 'alex',
+  lastname: 'mathew',
+  age: 48,
+  gender: 'm' }
+{ _id: ObjectId("634ba3445969c77c2b65ddab"),
+  firstname: 'gracy',
+  lastname: 'abero',
+  age: 72,
+  gender: 'f' }
+{ _id: ObjectId("634ba3be5969c77c2b65ddac"),
+  firstname: 'ranjan',
+  lastname: 'patil',
+  age: 60,
+  gender: 'm',
+  address: { street: 'phase1', zipcode: '400049', state: 'maharastra' } }
+
+
+
+db.users.find({"age":57})
+{ _id: ObjectId("634ba3445969c77c2b65dda8"),
+  firstname: 'shiv',
+  lastname: 'patil',
+  age: 57,
+  gender: 'm' }
+{ _id: ObjectId("634ba3445969c77c2b65dda9"),
+  firstname: 'rachana',
+  lastname: 'sharma',
+  age: 57,
+  gender: 'f' }
+
+
+
+
+
+db.users.update({"firstname":"gracy"},{$set:{"age":73}})
+'DeprecationWarning: Collection.update() is deprecated. Use updateOne, updateMany, or bulkWrite.'
+{ acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0 }
+db.users.find({"firstname":"gracy"})
+{ _id: ObjectId("634ba3445969c77c2b65ddab"),
+  firstname: 'gracy',
+  lastname: 'abero',
+  age: 73,
+  gender: 'f' }
+
+
+
+db.users.update({"firstname":"chetan"},{$set:{"age":33}})
+{ acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0 }
+db.users.find({"firstname":"chetan"})
+{ _id: ObjectId("634ba1165969c77c2b65dda5"),
+  firstname: 'chetan',
+  lastname: 'barot',
+  age: 33,
+  gender: 'm' }
+
+
+
+db.users.update({"firstname":"steve"},{$unset:{"age":1}})
+'DeprecationWarning: Collection.update() is deprecated. Use updateOne, updateMany, or bulkWrite.'
+{ acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0 }
+db.users.find()
+{ _id: ObjectId("634ba06e5969c77c2b65dda4"),
+  firstname: 'michel',
+  lastname: 'obama',
+  age: 25,
+  gender: 'm' }
+{ _id: ObjectId("634ba1165969c77c2b65dda5"),
+  firstname: 'chetan',
+  lastname: 'barot',
+  age: 33,
+  gender: 'm' }
+{ _id: ObjectId("634ba23b5969c77c2b65dda6"),
+  firstname: 'jaya',
+  lastname: 'kumari',
+  age: 35,
+  gender: 'f' }
+{ _id: ObjectId("634ba23b5969c77c2b65dda7"),
+  firstname: 'seeta',
+  lastname: 'kumari',
+  age: 22,
+  gender: 'f' }
+{ _id: ObjectId("634ba3445969c77c2b65dda8"),
+  firstname: 'shiv',
+  lastname: 'patil',
+  age: 57,
+  gender: 'm' }
+{ _id: ObjectId("634ba3445969c77c2b65dda9"),
+  firstname: 'rachana',
+  lastname: 'sharma',
+  age: 57,
+  gender: 'f' }
+{ _id: ObjectId("634ba3445969c77c2b65ddaa"),
+  firstname: 'alex',
+  lastname: 'mathew',
+  age: 48,
+  gender: 'm' }
+{ _id: ObjectId("634ba3445969c77c2b65ddab"),
+  firstname: 'gracy',
+  lastname: 'abero',
+  age: 73,
+  gender: 'f' }
+{ _id: ObjectId("634ba3be5969c77c2b65ddac"),
+  firstname: 'ranjan',
+  lastname: 'patil',
+  age: 60,
+  gender: 'm',
+  address: { street: 'phase1', zipcode: '400049', state: 'maharastra' } }
+{ _id: ObjectId("634bb0db0b374fefac32f328"),
+  firstname: 'steve',
+  lastname: 'haines',
+  gender: 'm' }
+
+
+
+
+db.users.remove({"firstname":"steve"})
+'DeprecationWarning: Collection.remove() is deprecated. Use deleteOne, deleteMany, findOneAndDelete, or bulkWrite.'
+{ acknowledged: true, deletedCount: 1 }
+db.users.find()
+{ _id: ObjectId("634ba06e5969c77c2b65dda4"),
+  firstname: 'michel',
+  lastname: 'obama',
+  age: 25,
+  gender: 'm' }
+{ _id: ObjectId("634ba1165969c77c2b65dda5"),
+  firstname: 'chetan',
+  lastname: 'barot',
+  age: 33,
+  gender: 'm' }
+{ _id: ObjectId("634ba23b5969c77c2b65dda6"),
+  firstname: 'jaya',
+  lastname: 'kumari',
+  age: 35,
+  gender: 'f' }
+{ _id: ObjectId("634ba23b5969c77c2b65dda7"),
+  firstname: 'seeta',
+  lastname: 'kumari',
+  age: 22,
+  gender: 'f' }
+{ _id: ObjectId("634ba3445969c77c2b65dda8"),
+  firstname: 'shiv',
+  lastname: 'patil',
+  age: 57,
+  gender: 'm' }
+{ _id: ObjectId("634ba3445969c77c2b65dda9"),
+  firstname: 'rachana',
+  lastname: 'sharma',
+  age: 57,
+  gender: 'f' }
+{ _id: ObjectId("634ba3445969c77c2b65ddaa"),
+  firstname: 'alex',
+  lastname: 'mathew',
+  age: 48,
+  gender: 'm' }
+{ _id: ObjectId("634ba3445969c77c2b65ddab"),
+  firstname: 'gracy',
+  lastname: 'abero',
+  age: 73,
+  gender: 'f' }
+{ _id: ObjectId("634ba3be5969c77c2b65ddac"),
+  firstname: 'ranjan',
+  lastname: 'patil',
+  age: 60,
+  gender: 'm',
+  address: { street: 'phase1', zipcode: '400049', state: 'maharastra' } }
+
+
+
+
+db.users.aggregate([{$group:{_id:"$gender",total:{$sum:1}}}])
+{ _id: 'f', total: 4 }
+{ _id: 'm', total: 6 }
+
+
+
+
+db.users.find({$and:[{"gender":"f"},{"lastname":"kumari"}]})
+{ _id: ObjectId("634ba23b5969c77c2b65dda6"),
+  firstname: 'jaya',
+  lastname: 'kumari',
+  age: 35,
+  gender: 'f' }
+{ _id: ObjectId("634ba23b5969c77c2b65dda7"),
+  firstname: 'seeta',
+  lastname: 'kumari',
+  age: 22,
+  gender: 'f' }
+
+
+
+
+db.users.find({$or:[{"gender":"f"},{"lastname":"kumari"}]})
+{ _id: ObjectId("634ba23b5969c77c2b65dda6"),
+  firstname: 'jaya',
+  lastname: 'kumari',
+  age: 35,
+  gender: 'f' }
+{ _id: ObjectId("634ba23b5969c77c2b65dda7"),
+  firstname: 'seeta',
+  lastname: 'kumari',
+  age: 22,
+  gender: 'f' }
+{ _id: ObjectId("634ba3445969c77c2b65dda9"),
+  firstname: 'rachana',
+  lastname: 'sharma',
+  age: 57,
+  gender: 'f' }
+{ _id: ObjectId("634ba3445969c77c2b65ddab"),
+  firstname: 'gracy',
+  lastname: 'abero',
+  age: 73,
+  gender: 'f' }
+
+
+db.users.find({"age":{$in:[22,57]}})
+{ _id: ObjectId("634ba23b5969c77c2b65dda7"),
+  firstname: 'seeta',
+  lastname: 'kumari',
+  age: 22,
+  gender: 'f' }
+{ _id: ObjectId("634ba3445969c77c2b65dda8"),
+  firstname: 'shiv',
+  lastname: 'patil',
+  age: 57,
+  gender: 'm' }
+{ _id: ObjectId("634ba3445969c77c2b65dda9"),
+  firstname: 'rachana',
+  lastname: 'sharma',
+  age: 57,
+  gender: 'f' }
+
+
+
+db.users.find().limit(2)
+{ _id: ObjectId("634ba06e5969c77c2b65dda4"),
+  firstname: 'michel',
+  lastname: 'obama',
+  age: 25,
+  gender: 'm' }
+{ _id: ObjectId("634ba1165969c77c2b65dda5"),
+  firstname: 'chetan',
+  lastname: 'barot',
+  age: 33,
+  gender: 'm' }
+
+
+db.users.find().skip(2)
+{ _id: ObjectId("634ba23b5969c77c2b65dda6"),
+  firstname: 'jaya',
+  lastname: 'kumari',
+  age: 35,
+  gender: 'f' }
+{ _id: ObjectId("634ba23b5969c77c2b65dda7"),
+  firstname: 'seeta',
+  lastname: 'kumari',
+  age: 22,
+  gender: 'f' }
+{ _id: ObjectId("634ba3445969c77c2b65dda8"),
+  firstname: 'shiv',
+  lastname: 'patil',
+  age: 57,
+  gender: 'm' }
+{ _id: ObjectId("634ba3445969c77c2b65dda9"),
+  firstname: 'rachana',
+  lastname: 'sharma',
+  age: 57,
+  gender: 'f' }
+{ _id: ObjectId("634ba3445969c77c2b65ddaa"),
+  firstname: 'alex',
+  lastname: 'mathew',
+  age: 48,
+  gender: 'm' }
+{ _id: ObjectId("634ba3445969c77c2b65ddab"),
+  firstname: 'gracy',
+  lastname: 'abero',
+  age: 73,
+  gender: 'f' }
+{ _id: ObjectId("634ba3be5969c77c2b65ddac"),
+  firstname: 'ranjan',
+  lastname: 'patil',
+  age: 60,
+  gender: 'm',
+  address: { street: 'phase1', zipcode: '400049', state: 'maharastra' } }
+{ _id: ObjectId("634bb0db0b374fefac32f328"),
+  firstname: 'steve',
+  lastname: 'haines',
+  gender: 'm' }
+
+
+
+
+db.users.update({"gender":"m"},{$set:{"age":20}},{"multi":true})
+{ acknowledged: true,
+  insertedId: null,
+  matchedCount: 6,
+  modifiedCount: 5,
+  upsertedCount: 0 }
+db.users.find()
+{ _id: ObjectId("634ba06e5969c77c2b65dda4"),
+  firstname: 'michel',
+  lastname: 'obama',
+  age: 20,
+  gender: 'm' }
+{ _id: ObjectId("634ba1165969c77c2b65dda5"),
+  firstname: 'chetan',
+  lastname: 'barot',
+  age: 20,
+  gender: 'm' }
+{ _id: ObjectId("634ba23b5969c77c2b65dda6"),
+  firstname: 'jaya',
+  lastname: 'kumari',
+  age: 35,
+  gender: 'f' }
+{ _id: ObjectId("634ba23b5969c77c2b65dda7"),
+  firstname: 'seeta',
+  lastname: 'kumari',
+  age: 22,
+  gender: 'f' }
+{ _id: ObjectId("634ba3445969c77c2b65dda8"),
+  firstname: 'shiv',
+  lastname: 'patil',
+  age: 20,
+  gender: 'm' }
+{ _id: ObjectId("634ba3445969c77c2b65dda9"),
+  firstname: 'rachana',
+  lastname: 'sharma',
+  age: 57,
+  gender: 'f' }
+{ _id: ObjectId("634ba3445969c77c2b65ddaa"),
+  firstname: 'alex',
+  lastname: 'mathew',
+  age: 20,
+  gender: 'm' }
+{ _id: ObjectId("634ba3445969c77c2b65ddab"),
+  firstname: 'gracy',
+  lastname: 'abero',
+  age: 73,
+  gender: 'f' }
+{ _id: ObjectId("634ba3be5969c77c2b65ddac"),
+  firstname: 'ranjan',
+  lastname: 'patil',
+  age: 20,
+  gender: 'm',
+  address: { street: 'phase1', zipcode: '400049', state: 'maharastra' } }
+{ _id: ObjectId("634bb0db0b374fefac32f328"),
+  firstname: 'steve',
+  lastname: 'haines',
+  gender: 'm',
+  age: 20 }
+
+
+
+db.users.aggregate([{$group:{_id:"$lastname",total_gen:{$sum:"$age"}}}])
+{ _id: 'abero', total_gen: 73 }
+{ _id: 'sharma', total_gen: 57 }
+{ _id: 'haines', total_gen: 20 }
+{ _id: 'mathew', total_gen: 20 }
+{ _id: 'kumari', total_gen: 57 }
+{ _id: 'patil', total_gen: 40 }
+{ _id: 'barot', total_gen: 20 }
+{ _id: 'obama', total_gen: 20 }
+db.users.aggregate([{$group:{_id:"$lastname",total_gen:{$sum:1}}}])
+{ _id: 'abero', total_gen: 1 }
+{ _id: 'sharma', total_gen: 1 }
+{ _id: 'haines', total_gen: 1 }
+{ _id: 'mathew', total_gen: 1 }
+{ _id: 'kumari', total_gen: 2 }
+{ _id: 'patil', total_gen: 2 }
+{ _id: 'barot', total_gen: 1 }
+{ _id: 'obama', total_gen: 1 }
+
+
+
+db.users.aggregate([{$group:{_id:"$lastname",total_gen:{$sum:1},sum_age:{$sum:"$age"}}}])
+{ _id: 'abero', total_gen: 1, sum_age: 73 }
+{ _id: 'sharma', total_gen: 1, sum_age: 57 }
+{ _id: 'haines', total_gen: 1, sum_age: 20 }
+{ _id: 'mathew', total_gen: 1, sum_age: 20 }
+{ _id: 'kumari', total_gen: 2, sum_age: 57 }
+{ _id: 'patil', total_gen: 2, sum_age: 40 }
+{ _id: 'barot', total_gen: 1, sum_age: 20 }
+{ _id: 'obama', total_gen: 1, sum_age: 20 }
+
+
+
+import java.util.*;
+public class Emp {
+    int empno;
+    String empname;
+    String designation;
+    String dept;
+    int salary;
+    
+    public void readempdata()
+    {
+        System.out.println("enter emp data :no,name,desig,dept,sal");
+        Scanner in=new Scanner(System.in);
+        empno=in.nextInt();
+        empname=in.next();
+        designation=in.next();
+        dept=in.next();
+        salary=in.nextInt();
+        
+    }
+    
+    public void dispempdata()
+    {
+        System.out.println(empno);
+        System.out.println(empname);
+        System.out.println(designation);
+        System.out.println(dept);
+        System.out.println(salary);
+    }
+    public static void main(String[] args) {
+       // System.out.println("enter emp data :no,name,desig,dept,sal");
+        Emp e1 = new Emp();
+        e1.readempdata();
+       // Emp e2 = new Emp();
+       // e1.dispempdata();
+        
+        Emp e2=new Emp();
+        e2.readempdata();
+        
+        e1.dispempdata();
+        e2.dispempdata();
+    }
+}
